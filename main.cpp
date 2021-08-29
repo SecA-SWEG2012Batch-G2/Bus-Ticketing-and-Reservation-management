@@ -103,6 +103,16 @@ struct customer{
         cin>>this->travelDistance;
     }
 };
+struct det{
+	int hour, day, month, year;
+};
+struct travelDet{
+	int TID;//TRAVEL DETAIL ID
+	det day;//DATE OF TRAVEL
+	int RID;//ROUTE IT TOOK 
+	int EID;//DRIVER WHO WAS ON THAT SPECIFIC TRAVEL
+	int numberOfCustomers;//NUMBER OF CUSTOMERS PRESENT ON THAT SPECIFIC TRAVEL
+};
 int main(){
 employeeInfo empData;
 empData.Record_Emp_Info(empData);
@@ -110,5 +120,6 @@ bus busInfo;
 customer customerInfo;
 busInfo.inputBus();
 customerInfo.inputCustomer();
+travelDet travelLog;
 return 0;
 }
