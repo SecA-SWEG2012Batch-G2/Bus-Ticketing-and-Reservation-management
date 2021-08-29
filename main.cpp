@@ -113,6 +113,41 @@ struct travelDet{
 	int EID;//DRIVER WHO WAS ON THAT SPECIFIC TRAVEL
 	int numberOfCustomers;//NUMBER OF CUSTOMERS PRESENT ON THAT SPECIFIC TRAVEL
 };
+
+struct Booking {//TICKET BOOKING STRUCTURE
+    int TID;//TICKET ID
+    int BID;//BUS ID
+    string route;//ROUTE OF TRAVEL
+    float price;//PRICE OF TRAVEL
+    int CID;//CUSTOMER ID
+    int EID;//EMPLOYEE (TELLER) ID
+    date depdate;//DATE OF DEPARTURE
+};
+
+void setdata(Booking &input) {//FUNCTION TO TAKE INPUT OF TICKET BOOKING
+       cout << "Enter the ticket ID: ";
+       cin >> input.TID;
+       cout << "Enter the bus ID: ";
+       cin >> input.BID;
+       cout << "Enter route: ";
+       cin.ignore();
+       getline (cin, input.route, '\n');
+       //cin.ignore();
+       cout << "Enter price of the trip: ";
+       cin >> input.price;
+       cout << "Enter customer ID: ";
+       cin >> input.CID;
+       cout << "Enter Employee ID: ";
+       cin >> input.EID;
+       cout << "Enter departure date (dd): ";
+       cin >> input.depdate.dd;
+       cout << "Enter departure date (mm): ";
+       cin >> input.depdate.mm;
+       cout << "Enter departure date (yy): ";
+       cin >> input.depdate.yy;
+    }
+
+
 int main(){
 employeeInfo empData;
 empData.Record_Emp_Info(empData);
@@ -121,5 +156,7 @@ customer customerInfo;
 busInfo.inputBus();
 customerInfo.inputCustomer();
 travelDet travelLog;
+Booking ticket;
+setdata(ticket);
 return 0;
 }
