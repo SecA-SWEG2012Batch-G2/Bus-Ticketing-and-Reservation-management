@@ -132,7 +132,6 @@ void setdata(Booking &input) {//FUNCTION TO TAKE INPUT OF TICKET BOOKING
        cout << "Enter route: ";
        cin.ignore();
        getline (cin, input.route, '\n');
-       //cin.ignore();
        cout << "Enter price of the trip: ";
        cin >> input.price;
        cout << "Enter customer ID: ";
