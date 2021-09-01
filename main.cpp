@@ -124,7 +124,14 @@ struct Booking {//TICKET BOOKING STRUCTURE
     date depdate;//DATE OF DEPARTURE
 };
 
-void setdata(Booking &input) {//FUNCTION TO TAKE INPUT OF TICKET BOOKING
+struct maintain {
+    int BID;//BUS ID
+    int EID;//EMPLOYEE ID
+    int MID;//MAINTENANCE ID
+    date maintainDate;//DATE OF ID
+};
+
+void setBooking(Booking &input) {//FUNCTION TO TAKE INPUT OF TICKET BOOKING
        cout << "Enter the ticket ID: ";
        cin >> input.TID;
        cout << "Enter the bus ID: ";
@@ -145,6 +152,20 @@ void setdata(Booking &input) {//FUNCTION TO TAKE INPUT OF TICKET BOOKING
        cout << "Enter departure date (yy): ";
        cin >> input.depdate.yy;
     }
+void setMaintain(maintain& input) {//FUNCTION TO TAKE INPUT MAINTENANCE DETAIL
+    cout << "Enter the bus ID: ";
+    cin >> input.BID;
+    cout << "Enter Employee ID: ";
+    cin >> input.EID;
+    cout << "Enter maintenance ID: ";
+    cin >> input.MID;
+    cout << "Enter maintenance date (dd): ";
+    cin >> input.maintainDate.dd;
+    cout << "Enter maintenance date (mm): ";
+    cin >> input.maintainDate.mm;
+    cout << "Enter maintenance date (yy): ";
+    cin >> input.maintainDate.yy;
+}
  struct Route{
    int BID; //BUS ID
    int RID; // ROUTE ID
@@ -176,7 +197,9 @@ busInfo.inputBus();
 customerInfo.inputCustomer();
 travelDet travelLog;
 Booking ticket;
-setdata(ticket);
+setBooking(ticket);
+maintain mHistory;
+setMaintain(mHistory);
 Route Terminal,input;
 Terminal.setData(input);
 return 0;
