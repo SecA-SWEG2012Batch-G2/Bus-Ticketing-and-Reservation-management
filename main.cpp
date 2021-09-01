@@ -2,9 +2,8 @@
 #include <cstring>
 using namespace std;
 
-struct date
-{
-    int dd,mm,yy;
+struct date{
+	int hour, day, month, year;
 };
 // structure to hold employees information
 struct employeeInfo
@@ -41,7 +40,7 @@ void Record_Emp_Info(employeeInfo empData){
         cout<<"\t"<<"Employee's Email: ";
         cin>>empData.email;
         cout<<"\t"<<"Date of employment (dd/mm/yy): ";
-        cin>>empData.empDate.dd>>empData.empDate.mm>>empData.empDate.yy;
+        cin>>empData.empDate.day>>empData.empDate.month>>empData.empDate.year;
         empData.empId++;
         char button;
         cout<<endl<<"Would you like to record another employee information? (y/n) : ";
@@ -63,7 +62,7 @@ struct bus{
     string license;//BUS LICENSE
     int EID;// EMPLOYEE ID
     int distanceTraveled;//DISTANCE THE BUS TRAVELED
-    int MID;// MAINTAINANCE HISTORY
+    int MID;// MAINTAINANCE ID
     int inputBus(){
         cout<<"[+] Enter the bus id: ";
         cin>>BID;
@@ -103,12 +102,10 @@ struct customer{
         cin>>this->travelDistance;
     }
 };
-struct det{
-	int hour, day, month, year;
-};
+
 struct travelDet{
 	int TID;//TRAVEL DETAIL ID
-	det day;//DATE OF TRAVEL
+	date day;//DATE OF TRAVEL
 	int RID;//ROUTE IT TOOK 
 	int EID;//DRIVER WHO WAS ON THAT SPECIFIC TRAVEL
 	int numberOfCustomers;//NUMBER OF CUSTOMERS PRESENT ON THAT SPECIFIC TRAVEL
