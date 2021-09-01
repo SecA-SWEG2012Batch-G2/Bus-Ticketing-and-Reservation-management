@@ -3,7 +3,7 @@
 using namespace std;
 
 struct date{
-	int hour, day, month, year;
+	int hour, dd, mm, yy;
 };
 // structure to hold employees information
 struct employeeInfo
@@ -11,7 +11,7 @@ struct employeeInfo
     int EID=100000;//EMPLOYEE ID
     int age;// EMPLOYEE'S AGE
     string empFullName,email;
-    string position// POSITION OF THE EMPLOYEE IN THE ORGANIZATION i.e.driver,mechanic
+    string position;// POSITION OF THE EMPLOYEE IN THE ORGANIZATION i.e.driver,mechanic
     string NID; // NATIONAL ID
     char sex;
     date empDate; // date of employment
@@ -43,7 +43,7 @@ void Record_Emp_Info(employeeInfo empData){
         cout<<"\t"<<"Employee's Email: ";
         cin>>empData.email;
         cout<<"\t"<<"Date of employment (dd/mm/yy): ";
-        cin>>empData.empDate.day>>empData.empDate.month>>empData.empDate.year;
+        cin>>empData.empDate.dd>>empData.empDate.mm>>empData.empDate.yy;
         empData.EID++;
         char button;
         cout<<endl<<"Would you like to record another employee information? (y/n) : ";
@@ -88,7 +88,7 @@ struct customer{
     int age; //AGE OF THE CUSTOMER
     string identificationCard; //ID NUMBER OF THE CUSTOMER
     int balance; //THE BALANCE OF THE CUSTOMER
-    char gender;//THE GENDER OF THE CUSTOintMER
+    char gender;//THE GENDER OF THE CUSTOMER
     int travelDistance; //THE DISTANCE THAT THE CUSTOMER COVERED BY THE COMPANY SERVICE
     void inputCustomer(){
         cout<<"[+] Enter the customer ID: ";
@@ -156,7 +156,7 @@ void setdata(Booking &input) {//FUNCTION TO TAKE INPUT OF TICKET BOOKING
   Route setData(Route input){     //FUNCTION TO ACCEPT INPUT FROM THE USER
         cout<<"Enter the bus Id: "<<endl;  
         cin>>input.BID;   // INPUT FOR BUS ID
-        cout<<"Enter the Root Id: "<<endl;
+        cout<<"Enter the Route Id: "<<endl;
         cin>>input.RID;  //INPUT FOR ROUTE ID
         cout<<"Enter departure or the Starting point: "<<endl;
         cin>>input.start;   //INPUT FOR DEPARTURE
