@@ -8,8 +8,11 @@ struct date{
 // structure to hold employees information
 struct employeeInfo
 {
-    int empId=100000,age;
-    string empFullName, position,email,nationalId; // position of the employee in the organization i.e.driver,mechanic
+    int EID=100000;//EMPLOYEE ID
+    int age;// EMPLOYEE'S AGE
+    string empFullName,email;
+    string position// POSITION OF THE EMPLOYEE IN THE ORGANIZATION i.e.driver,mechanic
+    string NID; // NATIONAL ID
     char sex;
     date empDate; // date of employment
     int phoneNumber,driverLicenseNo;
@@ -18,7 +21,7 @@ struct employeeInfo
 void Record_Emp_Info(employeeInfo empData){
     cout<<"\t\t"<<"Employee Record Input Portal"<<endl;
     record:
-        cout<<endl<<"empId: "<<empData.empId;
+        cout<<endl<<"employeeId: "<<empData.EID;
         cout<<endl<<"\t"<<"Employee Name: ";
         cin.ignore();
         getline(cin, empData.empFullName);
@@ -27,7 +30,7 @@ void Record_Emp_Info(employeeInfo empData){
         cout<<"\t"<<"Employee's Sex: ";
         cin>>empData.sex;
         cout<<"\t"<<"Employee's National ID: ";
-        cin>>empData.nationalId;
+        cin>>empData.NID;
         cout<<"\t"<<"Employee's Position: ";
         cin>>empData.position;
             if(empData.position=="driver")
@@ -41,7 +44,7 @@ void Record_Emp_Info(employeeInfo empData){
         cin>>empData.email;
         cout<<"\t"<<"Date of employment (dd/mm/yy): ";
         cin>>empData.empDate.day>>empData.empDate.month>>empData.empDate.year;
-        empData.empId++;
+        empData.EID++;
         char button;
         cout<<endl<<"Would you like to record another employee information? (y/n) : ";
         cin>>button;
