@@ -18,46 +18,96 @@ struct employeeInfo
     int phoneNumber,driverLicenseNo;
 
     //function to input and record employee information
-void Record_Emp_Info(employeeInfo empData){
+void Record_Emp_Info(int empCounter){//TAKE EMPLOYEE COUNT TO AUTOMATICALLY ASSIGN EMPLOYEE ID
     cout<<"\t\t"<<"Employee Record Input Portal"<<endl;
-    record:
-        cout<<endl<<"employeeId: "<<empData.EID;
         cout<<endl<<"\t"<<"Employee Name: ";
         cin.ignore();
-        getline(cin, empData.empFullName);
+        getline(cin, empFullName);//TAKE FULL NAME FROM THE USER
         cout<<"\t"<<"Employee's Age: ";
-        cin>>empData.age;
+        cin>>age;
         cout<<"\t"<<"Employee's Sex: ";
-        cin>>empData.sex;
+        cin>>sex;
         cout<<"\t"<<"Employee's National ID: ";
-        cin>>empData.NID;
+        cin>>NID;
+        position:
         cout<<"\t"<<"Employee's Position: ";
-        cin>>empData.position;
-            if(empData.position=="driver")
-            {
-            cout<<"\t"<<"Employee's Driver License Number: ";
-            cin>>empData.driverLicenseNo;
-            }
+        cin>>position;
+            if(position=="driver" || position=="Driver") {//CHECK IF EMPLOYEE IS DRIVER
+               cout<<"\t"<<"Employee's Driver License Number: ";
+               cin>>driverLicenseNo;
+               EID=1000+empCounter;//DRIVER'S ID ALWAYS START WITH 1000
+             }
+             else if (position=="Teller" || position=="teller") {
+               EID=2000+empCounter;//TELLER'S ID ALWAYS START WITH 2000
+             }
+             else if (position=="Mechanic" || position=="mechanic") {
+                EID=3000+empCounter;//MECHANIC'S ID ALWAYS START WITH 3000
+             }
+             else {
+                cout<<"We are sorry, we are not hiring for that position!! \n ";
+                goto position;//ONLY HIRE FOR THOSE POSITION ONLY
+             }
         cout<<"\t"<<"Employee's Phone Number (0912345678): ";
-        cin>>empData.phoneNumber;
+        cin>>phoneNumber;
         cout<<"\t"<<"Employee's Email: ";
-        cin>>empData.email;
+        cin>>email;
         cout<<"\t"<<"Date of employment (dd/mm/yy): ";
-        cin>>empData.empDate.dd>>empData.empDate.mm>>empData.empDate.yy;
-        empData.EID++;
-        char button;
-        cout<<endl<<"Would you like to record another employee information? (y/n) : ";
-        cin>>button;
-            if(button=='y'|| button=='Y')
-                {
-                    goto record;
-                }
-            else if(button=='n'||button=='N')
-                {
-                    exit;
-                }
-}
+        cin>>empDate.dd>>empDate.mm>>empDate.yy;
+   }
+
 };
+//FUNCTION TO DISPLAY EMPLOYEE INFORMATION
+void displayEmp(employeeInfo information[],int info_size) {//TAKE EMPLOYEE STRUCTURE ARRAY AND ITS SIZE AS PARAMETER
+        char command;
+        empMenu://SMALL MENU FOR DISPLAYING EMPLOYEE INFORMATION
+      cout<<"\tHow would you like to display employee record"<<endl;
+      cout<<"       ________________________________________________________\n";
+      cout<<"       | 1. Display all employee record                        |\n";
+      cout<<"       | 2. Search using employee ID                           |\n";
+      cout<<"       | 3. exit                                               |\n";
+      cout<<"       |-------------------------------------------------------|\n";
+      cin>>command;//INPUT THE COMMAND FROM USER
+      switch (command) {//SWITCH USED TO EXECUTE SPECIFIC COMMANDS
+        case '1':
+                //TABLE THAT DISPLAY EVERY EMPLOYEE RECORD
+                cout<<setfill(' ');
+                cout<<"\t|"<<setw(12)<<"Employee ID |"<<setw(30)<<"Employee name     "<<setw(10)<<"| Age |"<<setw(13)<<" Position |"<<setw(5)<<" Sex |"<<setw(12)<<" National ID|";
+            for (int x=0; x<info_size; x++) {
+                cout<<endl<<"\t|"<<setw(9)<<information[x].EID<<setw(4)<<"  |"<<setw(33)<<information[x].empFullName<<"|"<<setw(4)<<information[x].age<<" |"<<setw(12)<<information[x].position<<"|"<<setw(5)<<information[x].sex<<"|"<<setw(12)<<information[x].NID<<"|";
+            }
+            break;
+        case '2':
+            int searchId;
+            searchEmp:
+                //TABLE THAT DISPLAY DISIRED (SEARCHED) EMPLOYEE'S INFORMATION
+            cout<<"Input employee id: ";
+            cin>>searchId;
+            for (int x=0; x<info_size; x++) {
+                if (information[x].EID == searchId) {
+                    cout<<"\t|"<<setw(12)<<"Employee ID |"<<setw(30)<<"Employee name     "<<setw(10)<<"| Age |"<<setw(13)<<" Position |"<<setw(5)<<" Sex |"<<setw(12)<<" National ID|";
+                    cout<<endl<<"\t|"<<setw(9)<<information[x].EID<<setw(4)<<"  |"<<setw(33)<<information[x].empFullName<<"|"<<setw(4)<<information[x].age<<" |"<<setw(12)<<information[x].position<<"|"<<setw(5)<<information[x].sex<<"|"<<setw(12)<<information[x].NID<<"|";
+                    break;
+                }
+                if (x==info_size-1)       cout<<"Employee id not found";
+            }
+            searchAgain:
+            cout<<"\n Do you want to search again (y/n)?";//PROPT THE USER TO SEARCH AGAIN
+            cin>>command;
+            if (command == 'y' || command=='Y' || command=='n' || command=='N') {
+                if (command=='y' ||command=='Y') goto searchEmp;
+            }
+            else {
+                cout<<"Wrong key \n";//LOOP BACK TO PROPT IF WRONG KEY IS PRESSED
+                goto searchAgain;
+            }
+            break;
+        case '3':
+            break;
+        default:
+            cout<<"Wrong key \n";//LOOP BACK TO PROPT IF WRONG KEY IS PRESSED
+            goto empMenu;
+      }
+    }
 struct bus{
     int BID; //BUS ID
     string model; //BUS MODEL
