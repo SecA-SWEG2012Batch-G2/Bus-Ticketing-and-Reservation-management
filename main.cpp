@@ -20,6 +20,7 @@ struct employeeInfo
     //function to input and record employee information
 void Record_Emp_Info(int empCounter){//TAKE EMPLOYEE COUNT TO AUTOMATICALLY ASSIGN EMPLOYEE ID
     cout<<"\t\t"<<"Employee Record Input Portal"<<endl;
+	record:
         cout<<endl<<"\t"<<"Employee Name: ";
         cin.ignore();
         getline(cin, empFullName);//TAKE FULL NAME FROM THE USER
@@ -53,6 +54,17 @@ void Record_Emp_Info(int empCounter){//TAKE EMPLOYEE COUNT TO AUTOMATICALLY ASSI
         cin>>email;
         cout<<"\t"<<"Date of employment (dd/mm/yy): ";
         cin>>empDate.dd>>empDate.mm>>empDate.yy;
+	char button;
+        cout<<endl<<"Would you like to record another employee information? (y/n) : ";
+        cin>>button;
+            if(button=='y'|| button=='Y')
+                {
+                    goto record;
+                }
+            else if(button=='n'||button=='N')
+                {
+                    exit;
+                }
    }
 
 };
