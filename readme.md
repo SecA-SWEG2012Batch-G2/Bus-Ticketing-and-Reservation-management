@@ -93,7 +93,7 @@ Distributed under the MIT License. See LICENSE for more information.
 | 1 | [Hana Workneh](https://github.com/Hana-Workneh) | ETS 0996/12 |
 | 2 | [Abel Abebe](https://github.com/Abelabebe313) | ETS 0019/12 |
 | 3 | [Abel Getahun](https://github.com/abelops) | ETS 0034/12 |
-| 4 | [Abeselom Nekahiwot](https://github.com/abneka) | ETS 0047/12 |
+| 4 | [Abesolom Nekahiwot](https://github.com/abneka) | ETS 0047/12 |
 | 5 | [Akinahom Getahun](https://github.com/Akinahom) | ETS 0073/12 |
 
 # **🙏 Thank You!** 🙏
