@@ -17,7 +17,9 @@ struct employeeInfo
     int age;// EMPLOYEE'S AGE
     string empFullName,email;
     string position;// POSITION OF THE EMPLOYEE IN THE ORGANIZATION i.e.driver,mechanic
-	@@ -20,9 +24,8 @@ struct employeeInfo
+    string NID; // NATIONAL ID
+    char sex;
+    date empDate; // date of employment
     int phoneNumber,driverLicenseNo;
 
     //function to input and record employee information
@@ -27,7 +29,6 @@ void Record_Emp_Info(int empCounter){//TAKE EMPLOYEE COUNT TO AUTOMATICALLY ASSI
         cout<<endl<<"\t"<<"Employee Name: ";
         cin.ignore();
         getline(cin, empFullName);//TAKE FULL NAME FROM THE USER
-	@@ -32,96 +35,95 @@ void Record_Emp_Info(int empCounter){//TAKE EMPLOYEE COUNT TO AUTOMATICALLY ASSI
         cin>>sex;
         cout<<"\t"<<"Employee's National ID: ";
         cin>>NID;
@@ -390,10 +391,6 @@ void setMaintain(maintain& input) {//FUNCTION TO TAKE INPUT MAINTENANCE DETAIL
    float price; //PRICE OF TRAVEL
 
   void setRoute(int routeCount, int busCount, bus busInfo[], bool &busAva){     //FUNCTION TO ACCEPT INPUT FROM THE USER
-        /*cout<<"Enter the bus Id: "<<endl;
-        cin>>BID;   // INPUT FOR BUS ID
-        cout<<"Enter the Route Id: "<<endl;
-        cin>>*/
         BID=0;
         RID=6000+routeCount;  //INPUT FOR ROUTE ID
         cout<<"\n Enter departure or the Starting point: ";
@@ -570,7 +567,7 @@ struct Booking {//TICKET BOOKING STRUCTURE
        }
        cout << "Enter departure date (yy): ";
        cin >> depdate.yy;
-       printTicket(avaRoute,routeSize,information,infoSize);
+       printTicket(avaRoute,routeSize,information,infoSize);//call the ticket printer
         }
 
     }
