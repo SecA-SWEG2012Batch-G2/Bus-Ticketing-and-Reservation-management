@@ -617,3 +617,67 @@ Route Terminal,input;
 Terminal.setData(input);
 return 0;
 }
+void insertRecordMenu()
+{
+    int insertRec;
+    employeeInfo employee[2];
+    customer cuInfo[1];
+    system("cls");
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"   ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose which record you would like to insert: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Employee record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Bus information record\n"<<endl;
+    cout<<"\t\t\t\t"<<"4.Back to previous menu\n"<<endl;
+    cin>>insertRec;
+    switch(insertRec)
+    {
+    case 1:
+        system("cls");
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        cout<<"\t\t\t\t"<<"Employee Record Input Portal"<<endl;
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        for(int i=0; i<2; i++)
+        {
+            employee[i].Record_Emp_Info(i);
+        }
+        break;
+    case 2:
+        system("cls");
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        cout<<"\t\t\t\t"<<"Customer Information Record Portal"<<endl;
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        for (int x=0; x<1; x++)
+        {
+            cuInfo[x].inputCustomer(x+1);
+        }
+        cout<<"\n\n\t\t\t"<<"Would you like to Continue or Exit?"<<endl;
+        cout<<"\t\t\t\t"<<"1. Continue"<<endl;
+        cout<<"\t\t\t\t"<<"2. Exit"<<endl;
+        char Choice;
+        cin>>Choice;
+        switch(Choice)
+        {
+        case '1':
+            adminMenu();
+            break;
+        case '2':
+            break;
+
+        }
+        break;
+    case 3:
+        system("cls");
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        cout<<"\t\t\t\t"<<" Bus Information Record Portal"<<endl;
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+
+        break;
+    case 4:
+        adminMenu();
+        break;
+    }
+
+}
