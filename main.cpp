@@ -1,5 +1,8 @@
 #include <iostream>
 #include <cstring>
+#include <string>
+#include <iomanip>
+#include<windows.h>
 using namespace std;
 
 void insertRecordMenu(); //prototyping
@@ -388,9 +391,9 @@ struct Booking {//TICKET BOOKING STRUCTURE
     int CID;//CUSTOMER ID
     int EID;//EMPLOYEE (TELLER) ID
     date depdate;//DATE OF DEPARTURE
-    void setBooking(int ticketCount,Route avaRoute[], int routeSize, customer information[], int infoSize) {//take number of tickets, available routes with its array size and customer information with its array size
+        void setBooking(int ticketCount,Route avaRoute[], int routeSize, customer information[], int infoSize) {//take number of tickets, available routes with its array size and customer information with its array size
        TID=7001+ticketCount;//ticket id generator
-       int inputRoute;//take which route the customer wanna take
+       int inputRoute,temp;//take which route the customer wanna take
        cout<<endl;
        //outputs the available routes (routes which have assigned driver and bus)
        cout<<"\t|"<<setw(13)<<"Route ID |"<<setw(13)<<"Bus ID     |"<<setw(15)<<" Start |"<<setw(13)<<" End |"<<setw(5)<<" Distance |"<<setw(12)<<" Price|"<<setw(17)<<" Available Seats|";
@@ -409,19 +412,20 @@ struct Booking {//TICKET BOOKING STRUCTURE
                     price=avaRoute[x].price;//record the price of the trip
                     avaRoute[x].seatsAva--;//update available seats since seat is assigned for customer
                     seatNum=avaRoute[x].seatMax-avaRoute[x].seatsAva;//which seat will the customer be taking
+                    temp=x;
                     break;
                    }
                  else if (x==routeSize-1) {//check if the route entered by the customer is from the list
                     cout<<"Wrong Route id! \n";
-                    goto tryagain;
+                    goto tryagain;//get to try until they get the right one
                        }
                    }
-       char chs;
-       int counter=0;
-        cout << "\nEnter customer ID: ";
+       char chs;//char variable to take command from the user
+       int counter=0;//counts trial of input
+        cout << "\nEnter customer ID: ";//take customer id to buy a ticket and deduct price from balance (if prompted)
        a:cin >> CID;
        bool stt=false;
-       for(int i=0; i<infoSize; i++){
+       for(int i=0; i<infoSize; i++){//check if the customer is registered or not
         if(information[i].CID==CID){
             stt=true;
             break;
@@ -430,18 +434,21 @@ struct Booking {//TICKET BOOKING STRUCTURE
        if(stt==false){
         cout<<"[-] No customer with that ID, please enter valid ID: ";
         counter++;
-        if (counter<3) goto a;
-        else cout<<"\n\tToo many attempts!\n";
+        if (counter<3) goto a;//input customer id again if left with trials
+        else {
+          cout<<"\n\tToo many attempts!\n";
+          avaRoute[temp].seatsAva++;//revert the number of seats to the original
+        }
        }
-       break;
+       if (counter<3) {//all the function will not take place if correct customer id is not available
        f:
        cout<<"\t=> Do you want to pay in cash or to be deducted from prepaid account \n\t [+} press 'y' for prepaid \t [+] press 'n' for cash";
        cin>>chs;
-       if(chs=='y'||chs=='Y'||chs=='n'||chs=='N'){
+       if(chs=='y'||chs=='Y'||chs=='n'||chs=='N'){//take the price fee from customer's balance or paid in cash
         if(chs=='y'||chs=='Y'){
             for(int i=0; i<infoSize; i++){
                 if(information[i].CID==CID){
-                    if(information[i].balance>=price){
+                    if(information[i].balance>=price){//check if the customer have enough balance
                         information[i].balance-=price;
                     }
                     else{
@@ -454,6 +461,7 @@ struct Booking {//TICKET BOOKING STRUCTURE
        else{
         goto f;
        }
+       //take the date of departure
        cout << "Enter departure date (dd): ";
        cin >> depdate.dd;
        cout << "Enter departure date (mm): ";
@@ -461,6 +469,8 @@ struct Booking {//TICKET BOOKING STRUCTURE
        cout << "Enter departure date (yy): ";
        cin >> depdate.yy;
        printTicket(avaRoute,routeSize,information,infoSize);
+        }
+
     }
 };
 
