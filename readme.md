@@ -1,6 +1,6 @@
 # Bus Ticketing and Reservation Management System
 
-##  Welcome!,  This is a Bus ticketing and reservation management system developed by AASTU SWENG section A Group 2 students Batch of 2012 to apply our knowledge and skills in c++.
+##  Welcome!  This is a Bus ticketing and reservation management system developed by AASTU SWENG section A Group 2 students Batch of 2012 to apply our knowledge and skills in c++.
 ---
 <img src = "https://holidaypackagestravel.files.wordpress.com/2016/12/online-bus-ticket-booking.jpg?w=880&h=312&crop=1" >
 
