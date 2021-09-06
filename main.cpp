@@ -2,6 +2,8 @@
 #include <cstring>
 using namespace std;
 
+void insertRecordMenu(); //prototyping
+void adminMenu(); //prototyping
 struct date{
 	int hour, dd, mm, yy;
 };
@@ -45,7 +47,7 @@ void Record_Emp_Info(int empCounter){//TAKE EMPLOYEE COUNT TO AUTOMATICALLY ASSI
                 EID=3000+empCounter;//MECHANIC'S ID ALWAYS START WITH 3000
              }
              else {
-                cout<<"We are sorry, we are not hiring for that position!! \n ";
+                cout<<"\n\t\t"<<"Sorry, there is no employee with that position!! \n \n ";
                 goto position;//ONLY HIRE FOR THOSE POSITION ONLY
              }
         cout<<"\t"<<"Employee's Phone Number (0912345678): ";
@@ -248,9 +250,190 @@ void setMaintain(maintain& input) {//FUNCTION TO TAKE INPUT MAINTENANCE DETAIL
         }
 
 };
+void EditCustomer(customer Customer[])
+{
+    cout<<"Enter customers id: ";
+    int Choice;
+    cin>>Choice;
+    // List of options to edit
+    int EditChoice;
+    cout << endl << "\t\t\t"<<" What would you like to edit?" << endl;
+    cout <<"\t\t\t"<< "  1. Customer Name" << endl;
+    cout <<"\t\t\t"<< "  2. Customer age" << endl;
+    cout <<"\t\t\t"<< "  3. Customer identification " << endl;
+    cout <<"\t\t\t"<< "  4. Customer balance" << endl;
+    cout <<"\t\t\t"<< "  5. Customer Sex" << endl;
+    cout <<"\t\t\t"<< "  6. Customer travel distance" << endl;
+    cout <<"\t\t\t"<< endl << " Edit Choice: ";
+    cin >> EditChoice;
+    cout << endl;
+    // Accept new values based on choice
+    switch(EditChoice)
+    {
+    case 1:
+        cout << " Enter Customer Name: ";
+        cin >> Customer[Choice].name;
+        break;
+    case 2:
+        cout << " Enter Customer age: ";
+        cin >> Customer[Choice].age;
+        break;
+    case 3:
+        cout << "Enter Customer identification: ";
+        cin >> Customer[Choice].identificationCard;
+        break;
+    case 4:
+        cout << " Enter Customer balance" << endl;
+        cin >> Customer[Choice].balance;
+        break;
+    case 5:
+        cout << " Enter Customer Gender: ";
+        cin >> Customer[Choice].sex;
+        break;
+    case 6:
+        cout << " Enter Customer travel distance: ";
+        cin >> Customer[Choice].travelDistance;
+        break;
+    }
+    cout<<endl<<"\t----\tCustomer Record Edited Successfully!\t----\n"<<endl<<endl;
+    displayCus(Customer,10);
+    system("pause");
+    system("cls");
+}
+void editRecordMenu(customer Customers[])
+{
+    int opt;
+    system("cls");
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"  ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose which record you would like to edit/modify: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Employee record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Bus information record\n"<<endl;
+    cout<<"\t\t\t\t"<<"4.Back to previous menu\n"<<endl;
+    cin>>opt;
+    switch(opt)
+    {
+    case 1:
+        cout<<"Will be implemented soon!";
+        break;
+    case 2:
+        EditCustomer(Customers);
+        break;
+    case 4:
+        adminMenu();
+        break;
+    }
+}
+//Initialize Customers sample data
+customer Customers[10];
+void CustomerInitializer()
+{
+Customers[0] = {0,"abebe kebede",23,"Ets0213/22",234,'M',2344};
+Customers[1] = {1,"Eden Getachew",29,"Ets3243/22",244,'F',2344};
+Customers[2] = {2,"Solomon Feleke",21,"Ets0213/22",234,'M',2344};
+Customers[3] = {3,"Daniel yohannes",18,"Ets3243/22",244,'F',2344};
+Customers[4] = {4,"abel tadesse",19,"Ets0213/22",234,'M',2344};
+Customers[5] = {5,"Meron tesema",23,"Ets3243/22",244,'F',2344};
+Customers[6] = {6,"lidya geremew",24,"Ets0213/22",234,'M',2344};
+Customers[7] = {7,"dagmawi ketema",22,"Ets3243/22",244,'F',2344};
+Customers[8] = {8,"fikirte belete",33,"Ets0213/22",234,'M',2344};
+Customers[9] = {9,"hewan adane",23,"Ets3243/22",244,'F',2344};
+}
+void adminMenu()
+{
+    system("cls");
+    int adminOpt;
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"  ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose the task you would like to do: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Insert a new record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Edit a record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Display entries\n"<<endl;
+    cin>>adminOpt;
+    switch(adminOpt)
+    {
+    case 1:
+        insertRecordMenu();
+        break;
+    case 2:
+        editRecordMenu(Customers);
+        break;
+    case 3:
+        displayCus(Customers,10);
+        break;
+    }
+}
 
+void askPassword()
+{
+pass:
+    system("cls");
+    int password=1234;
+    int opt;
+    cout<<"\n\n\n\t\t\t\t"<<"Please enter password:"<<endl;
+    cout<<"\t\t\t\t"<<"password:  ";
+    cin>>password;
+    if (password==1234)
+    {
+        system("cls");
+        adminMenu();
+    }
+    else
+    {
+        system("cls");
+        cout<<"\n\t\t\t\t"<<"Incorrect Password! please try again!\n"<<endl;
+        cout<<"\t\t\t\t"<<"press any number to try again and 0 to exit"<<endl;
+        cin>>opt;
+        if(opt==0)
+        {
+            exit;
+        }
+        else
+        {
+            goto pass;
+        }
+    }
+
+}
+void book(){
+    system("cls");
+cout<<"\t\t\t"<<"***********************************"<<endl;
+cout<<"\t\t\t\t"<<"WELCOME TO BEST-BUS!"<<endl;
+cout<<"\t\t\t"<<"***********************************"<<endl;
+cout<<"\t\t\t"<<"Booking\n"<<endl;
+}
+void masterMenu()
+{
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"WELCOME TO BEST-BUS!"<<endl;
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t"<<"Please choose your clearance level:\n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Administrator\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer"<<endl;
+    int option;
+    cin>>option;
+    switch(option)
+    {
+    case 1:
+        askPassword();
+        break;
+    case 2:
+       book();
+    break;
+
+    }
+}
 
 int main(){
+// 0 for background Color(Black)
+// B for text color(light aqua)
+    system("Color 0B");
+//Initialize Customer sample data
+    CustomerInitializer();
+    masterMenu();
 employeeInfo empData;
 empData.Record_Emp_Info(empData);
 bus busInfo;
@@ -265,4 +448,68 @@ setMaintain(mHistory);
 Route Terminal,input;
 Terminal.setData(input);
 return 0;
+}
+void insertRecordMenu()
+{
+    int insertRec;
+    employeeInfo employee[2];
+    customer cuInfo[1];
+    system("cls");
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"   ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose which record you would like to insert: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Employee record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Bus information record\n"<<endl;
+    cout<<"\t\t\t\t"<<"4.Back to previous menu\n"<<endl;
+    cin>>insertRec;
+    switch(insertRec)
+    {
+    case 1:
+        system("cls");
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        cout<<"\t\t\t\t"<<"Employee Record Input Portal"<<endl;
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        for(int i=0; i<2; i++)
+        {
+            employee[i].Record_Emp_Info(i);
+        }
+        break;
+    case 2:
+        system("cls");
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        cout<<"\t\t\t\t"<<"Customer Information Record Portal"<<endl;
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        for (int x=0; x<1; x++)
+        {
+            cuInfo[x].inputCustomer(x+1);
+        }
+        cout<<"\n\n\t\t\t"<<"Would you like to Continue or Exit?"<<endl;
+        cout<<"\t\t\t\t"<<"1. Continue"<<endl;
+        cout<<"\t\t\t\t"<<"2. Exit"<<endl;
+        char Choice;
+        cin>>Choice;
+        switch(Choice)
+        {
+        case '1':
+            adminMenu();
+            break;
+        case '2':
+            break;
+
+        }
+        break;
+    case 3:
+        system("cls");
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        cout<<"\t\t\t\t"<<" Bus Information Record Portal"<<endl;
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+
+        break;
+    case 4:
+        adminMenu();
+        break;
+    }
+
 }
