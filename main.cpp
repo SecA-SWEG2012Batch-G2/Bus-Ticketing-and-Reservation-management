@@ -427,12 +427,13 @@ struct Booking {//TICKET BOOKING STRUCTURE
     int CID;//CUSTOMER ID
     int EID;//EMPLOYEE (TELLER) ID
     date depdate;//DATE OF DEPARTURE
-        void printTicket(Route routeInfo[],int routeSiz, customer information[], int infoSize ){//Function that displays the ticket
+    void printTicket(Route routeInfo[],int routeSiz, customer information[], int infoSize ){
+        //Function that displays the ticket
         string name;
-        int identify;
+        int identify;//identify on which array the route exist
         for(int i=0; i<=infoSize; i++){
             if(information[i].CID==CID){
-                name = information[i].name;
+                name = information[i].name;//prints the name from the customer record
             }
         }
         for (int x=0; x<routeSiz; x++) if (routeInfo[x].RID==RID) identify=x;
@@ -448,9 +449,10 @@ struct Booking {//TICKET BOOKING STRUCTURE
         cout<<"\t|"<<setw(9)<<"Price: "<<setw(12)<<price<<setw(36)<<"|\n";
         cout<<"\t|"<<setw(8)<<"Date: "<<setw(8)<<depdate.dd<<"/"<<depdate.mm<<"/"<<depdate.yy<<setw(33)<<"|\n";
         cout<<"\t|_______________________________________________________|\n";
-        //exit(0);
     }
-	void setBooking(int ticketCount,Route avaRoute[], int routeSize, customer information[], int infoSize) {//take number of tickets, available routes with its array size and customer information with its array size
+    //FUNCTION TO TAKE INPUT OF TICKET BOOKING
+    void setBooking(int ticketCount,Route avaRoute[], int routeSize, customer information[], int infoSize) {
+        //take number of tickets, available routes with its array size and customer information with its array size
        TID=7001+ticketCount;//ticket id generator
        int inputRoute,temp;//take which route the customer wanna take
        cout<<endl;
@@ -461,11 +463,13 @@ struct Booking {//TICKET BOOKING STRUCTURE
                     cout<<endl<<"\t|"<<setw(9)<<avaRoute[x].RID<<setw(4)<<"  |"<<setw(11)<<avaRoute[x].BID<<" |"<<setw(13)<<avaRoute[x].start<<" |"<<setw(12)<<avaRoute[x].End<<"|"<<setw(10)<<avaRoute[x].distance<<"|"<<setw(11)<<avaRoute[x].price<<"|"<<setw(11)<<avaRoute[x].seatsAva<<setw(6)<<"|";
                     }
               }
-       tryagain://prompts again if customer inputs wrong route (routes which are not in the list)
+       tryagain:
+           //prompts again if customer inputs wrong route (routes which are not in the list)
             cout<<"\n [+] input Route id to book your ticket: ";
             cin>>inputRoute;//take which route the customer wanna take
             for (int x=0; x<routeSize;x++) {
-                if (avaRoute[x].RID==inputRoute && avaRoute[x].BID!=0) {//checks if the route entered by the customer is available
+                if (avaRoute[x].RID==inputRoute && avaRoute[x].BID!=0) {
+                        //checks if the route entered by the customer is available
                     RID=inputRoute;//assign the route id after it's checked for availability
                     BID=avaRoute[x].BID;//record which bus the customer will be taking
                     price=avaRoute[x].price;//record the price of the trip
@@ -474,7 +478,8 @@ struct Booking {//TICKET BOOKING STRUCTURE
                     temp=x;
                     break;
                    }
-                 else if (x==routeSize-1) {//check if the route entered by the customer is from the list
+                 else if (x==routeSize-1) {
+                        //check if the route entered by the customer is from the list
                     cout<<"Wrong Route id! \n";
                     goto tryagain;//get to try until they get the right one
                        }
@@ -484,7 +489,8 @@ struct Booking {//TICKET BOOKING STRUCTURE
         cout << "\nEnter customer ID: ";//take customer id to buy a ticket and deduct price from balance (if prompted)
        a:cin >> CID;
        bool stt=false;
-       for(int i=0; i<infoSize; i++){//check if the customer is registered or not
+       for(int i=0; i<infoSize; i++){
+            //check if the customer is registered or not
         if(information[i].CID==CID){
             stt=true;
             break;
@@ -499,15 +505,18 @@ struct Booking {//TICKET BOOKING STRUCTURE
           avaRoute[temp].seatsAva++;//revert the number of seats to the original
         }
        }
-       if (counter<3) {//all the function will not take place if correct customer id is not available
+       if (counter<3) {
+           //all the function will not take place if correct customer id is not available
        f:
        cout<<"\t=> Do you want to pay in cash or to be deducted from prepaid account \n\t [+} press 'y' for prepaid \t [+] press 'n' for cash";
        cin>>chs;
-       if(chs=='y'||chs=='Y'||chs=='n'||chs=='N'){//take the price fee from customer's balance or paid in cash
+       if(chs=='y'||chs=='Y'||chs=='n'||chs=='N'){
+           //take the price fee from customer's balance or paid in cash
         if(chs=='y'||chs=='Y'){
             for(int i=0; i<infoSize; i++){
                 if(information[i].CID==CID){
-                    if(information[i].balance>=price){//check if the customer have enough balance
+                    if(information[i].balance>=price){
+                        //check if the customer have enough balance
                         information[i].balance-=price;
                     }
                     else{
@@ -573,10 +582,47 @@ buses[2] = {2,"	Single deck","red","aa13",2,9876,2,20};
 buses[3] = {3,"minibus","blue","ab11",3,7654,3,12};
 buses[4] = {4,"minibus","white","ab12",4,1234,4,12};
 }
+	
+int prepaid(customer information[], int infoSize) //function used for perpaid card
+{
+    int CID, bal;
+    bool stat=false;
+    char cont;
+info:
+    cout<<"\n[+] Enter the ID of the customer to add prepaid card: ";
+    cin>>CID;
+    for(int i=0; i<infoSize; i++)
+    {
+        if(information[i].CID==CID)
+        {
+            stat = true;
+            cout<<"\n\t Current balance: "<<information[i].balance<<"\n";
+            cout<<"[+]  Enter the amount to add to the prepaid card: ";
+            cin>>bal;
+            information[i].balance+=bal;
+            cout<<"    the prepaid balance of the user is "<<information[i].balance<<"\n";
+        }
+    }
+    if(stat==false)
+    {
+        cout<<"[-] No customer with that ID, do you want to try again(y/n)?";
+        cin>>cont;
+        if(cont=='y'||cont=='Y'||cont=='n'||cont=='N')
+        {
+            if(cont=='y'||cont=='Y')
+            {
+                goto info;
+            }
+        }
+
+    }
+}
+	
 void adminMenu()
 {
     system("cls");
-    int adminOpt;
+    tryagain:
+    char adminOpt;
     cout<<"\t\t\t"<<"***********************************"<<endl;
     cout<<"\t\t\t\t"<<"  ADMIN PORTAL"<<endl;
     cout<<"\t\t\t"<<"***********************************\n"<<endl;
@@ -585,21 +631,44 @@ void adminMenu()
     cout<<"\t\t\t\t"<<"2.Edit a record\n"<<endl;
     cout<<"\t\t\t\t"<<"3.Display entries\n"<<endl;
     cout<<"\t\t\t\t"<<"4.Delete entries\n"<<endl;
+    cout<<"\t\t\t\t"<<"5.Recharge Customer's Balance\n"<<endl;
     cin>>adminOpt;
     switch(adminOpt)
     {
-    case 1:
+    case '1':
         insertRecordMenu();
+        system("pause");
+        system ("cls");
+        goto tryagain;
         break;
-    case 2:
+    case '2':
         editRecordMenu(Customers,Employees,buses);
+        system("pause");
+        system ("cls");
+        goto tryagain;
         break;
-    case 3:
+    case '3':
         displayRecord(Customers,Employees,buses);
+        system("pause");
+        system ("cls");
+        goto tryagain;
         break;
-    case 4:
+    case '4':
         deleteRecordMenu(Customers,Employees,buses);
+        system("pause");
+        system ("cls");
+        goto tryagain;
         break;
+    case '5':
+        prepaid(Customers,10);
+        system("pause");
+        system ("cls");
+        goto tryagain;
+        break;
+    default:
+        system("cls");
+        cout<<"\n\t\t\t\t  !Wrong key! \n\n";
+        goto tryagain;
     }
 }
 
@@ -667,22 +736,33 @@ switch(opt){
 }
 void masterMenu()
 {
+    tryagain:
     cout<<"\t\t\t"<<"***********************************"<<endl;
     cout<<"\t\t\t\t"<<"WELCOME TO BEST-BUS!"<<endl;
     cout<<"\t\t\t"<<"***********************************"<<endl;
     cout<<"\t\t\t"<<"Please choose your clearance level:\n"<<endl;
     cout<<"\t\t\t\t"<<"1.Administrator\n"<<endl;
     cout<<"\t\t\t\t"<<"2.Customer"<<endl;
-    int option;
+    char option;
     cin>>option;
     switch(option)
       {
-    case 1:
+    case '1':
         askPassword();
+        system("pause");
+        system ("cls");
+        goto tryagain;
         break;
-    case 2:
+    case '2':
        book(Customers, 4);
-    break;
+       system("pause");
+        system ("cls");
+        goto tryagain;
+        break;
+    default:
+        system("cls");
+        cout<<"\n\t\t\t\t  !Wrong key! \n\n";
+        goto tryagain;
 
     }
 }
