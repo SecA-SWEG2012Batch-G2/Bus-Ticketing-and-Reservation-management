@@ -250,6 +250,112 @@ void setMaintain(maintain& input) {//FUNCTION TO TAKE INPUT MAINTENANCE DETAIL
         }
 
 };
+void EditEmployee(employeeInfo employee[]){
+    cout<<"Enter employee id: ";
+    int Choice;
+    cin>>Choice;
+    // List of options to edit
+    int EditChoice;
+    cout << endl << "\t\t\t"<<" What would you like to edit?" << endl;
+    cout <<"\t\t\t"<< "  1. Employee Name" << endl;
+    cout <<"\t\t\t"<< "  2. Employee age" << endl;
+    cout <<"\t\t\t"<< "  3. Employee identification " << endl;
+    cout <<"\t\t\t"<< "  4. Employee position" << endl;
+    cout <<"\t\t\t"<< "  5. Employee Sex" << endl;
+    cout <<"\t\t\t"<< "  6. Employee phone number" << endl;
+    cout <<"\t\t\t"<< "  7. Employee Email" << endl;
+    cout <<"\t\t\t"<< "  8. Employee date of employment" << endl;
+    cout <<"\t\t\t"<< endl << " Edit Choice: ";
+    cin >> EditChoice;
+    cout << endl;
+    // Accept new values based on choice
+    switch(EditChoice)
+    {
+    case 1:
+        cout << " Enter Employee Name: ";
+        cin >> employee[Choice].empFullName;
+        break;
+    case 2:
+        cout << " Enter Employee age: ";
+        cin >> employee[Choice].age;
+        break;
+    case 3:
+        cout << "Enter Employee identification: ";
+        cin >> employee[Choice].NID;
+        break;
+    case 4:
+        cout << " Enter Employee driving license number" << endl;
+        cin >> employee[Choice].driverLicenseNo;
+        break;
+    case 5:
+        cout << " Enter Employee Gender: ";
+        cin >> employee[Choice].sex;
+        break;
+    case 6:
+        cout << " Enter Employee phone number: ";
+        cin >> employee[Choice].phoneNumber;
+        break;
+    case 7:
+        cout << " Enter Employee Email: ";
+        cin >> employee[Choice].email;
+        break;
+    case 8:
+        cout << " Enter Employee Date of employment: ";
+        cin >> employee[Choice].empDate.dd;
+        cin >> employee[Choice].empDate.mm;
+        cin >> employee[Choice].empDate.yy;
+        break;
+    }
+    cout<<endl<<"\t----\tEmployee Record Edited Successfully!\t----\n"<<endl<<endl;
+    displayEmp(employee,5);
+    system("pause");
+    system("cls");
+
+}
+void EditBus(bus Bus[]){
+cout<<"Enter bus id: ";
+    int Choice;
+    cin>>Choice;
+    // List of options to edit
+    int EditChoice;
+    cout << endl << "\t\t\t"<<" What would you like to edit?" << endl;
+    cout <<"\t\t\t"<< "  1. Bus Model" << endl;
+    cout <<"\t\t\t"<< "  2. Bus color" << endl;
+    cout <<"\t\t\t"<< "  3. Bus License " << endl;
+    cout <<"\t\t\t"<< "  4. Distance traveled by the bus" << endl;
+    cout <<"\t\t\t"<< "  5. Bus seats" << endl;
+    cout <<"\t\t\t"<< endl << " Edit Choice: ";
+    cin >> EditChoice;
+    cout << endl;
+    // Accept new values based on choice
+    switch(EditChoice)
+    {
+    case 1:
+        cout << " Enter Bus Model: ";
+        cin >> Bus[Choice].model;
+        break;
+    case 2:
+        cout << " Enter Bus Color: ";
+        cin >> Bus[Choice].color;
+        break;
+    case 3:
+        cout << "Enter Bus License: ";
+        cin >> Bus[Choice].license;
+        break;
+    case 4:
+        cout << " Enter Distance traveled by the bus" << endl;
+        cin >> Bus[Choice].distanceTraveled;
+        break;
+    case 5:
+        cout << " Enter Bus seats: ";
+        cin >> Bus[Choice].seats;
+        break;
+    }
+    cout<<endl<<"\t----\tBus Record Edited Successfully!\t----\n"<<endl<<endl;
+    displayBus(Bus,5);
+    system("pause");
+    system("cls");
+}
 void EditCustomer(customer Customer[])
 {
     cout<<"Enter customers id: ";
@@ -300,7 +406,7 @@ void EditCustomer(customer Customer[])
     system("pause");
     system("cls");
 }
-void editRecordMenu(customer Customers[])
+void editRecordMenu(customer Customers[], employeeInfo Employees[], bus buses[])
 {
     int opt;
     system("cls");
@@ -316,17 +422,19 @@ void editRecordMenu(customer Customers[])
     switch(opt)
     {
     case 1:
-        cout<<"Will be implemented soon!";
+        EditEmployee(Employees);
         break;
     case 2:
         EditCustomer(Customers);
         break;
+    case 3:
+        EditBus(buses);
     case 4:
         adminMenu();
         break;
     }
 }
-//Initialize Customers sample data
+//Initialize Customers default data
 customer Customers[10];
 void CustomerInitializer()
 {
@@ -340,6 +448,26 @@ Customers[6] = {6,"lidya geremew",24,"Ets0213/22",234,'M',2344};
 Customers[7] = {7,"dagmawi ketema",22,"Ets3243/22",244,'F',2344};
 Customers[8] = {8,"fikirte belete",33,"Ets0213/22",234,'M',2344};
 Customers[9] = {9,"hewan adane",23,"Ets3243/22",244,'F',2344};
+}
+//Initialize Employees default data
+employeeInfo Employees[5];
+void EmployeeInitializer()
+{
+Employees[0]={0,23,"abebe kebede","aaa@gmail.com","teller","Ets0213/22",'M',{2,3,2021},0115535654,2344};
+Employees[1] = {1,29,"Eden Getachew","eee@gmail.com","Driver","Ets0213/22",'M',{2,3,2021},0115535654,2344};
+Employees[2] = {2,21,"Solomon Feleke","sss@gmail.com","Driver","Ets0213/22",'M',{2,3,2021},0115535654,2344};
+Employees[3] = {3,24,"Daniel yohannes","ddd@gmail.com","Driver","Ets0213/22",'M',{2,3,2021},0115535654,2344};
+Employees[4] = {4,25,"abel tadesse","abc@gmail.com","Driver","Ets0213/22",'M',{2,3,2021},0115535654,2344};
+}
+//Initialize Bus default data
+bus buses[5];
+void BusInitializer()
+{
+buses[0] = {0,"	Single deck","red","aa11",0,1223,0,20};
+buses[1] = {1,"	Single deck","white","aa12",1,5678,1,20};
+buses[2] = {2,"	Single deck","red","aa13",2,9876,2,20};
+buses[3] = {3,"minibus","blue","ab11",3,7654,3,12};
+buses[4] = {4,"minibus","white","ab12",4,1234,4,12};
 }
 void adminMenu()
 {
