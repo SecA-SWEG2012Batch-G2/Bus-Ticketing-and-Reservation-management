@@ -539,15 +539,62 @@ buses[4] = {4,"minibus","white","ab12",4,1234,4,12};
 }
 void adminMenu()
 {
-	@@ -487,7 +882,7 @@ void adminMenu()
+    system("cls");
+    int adminOpt;
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"  ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose the task you would like to do: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Insert a new record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Edit a record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Display entries\n"<<endl;
+    cout<<"\t\t\t\t"<<"4.Delete entries\n"<<endl;
+    cin>>adminOpt;
+    switch(adminOpt)
+    {
+    case 1:
         insertRecordMenu();
         break;
     case 2:
-        editRecordMenu(Customers);
+        editRecordMenu(Customers,Employees,buses);
         break;
     case 3:
-        displayCus(Customers,10);
-	@@ -526,13 +921,26 @@ void askPassword()
+        displayRecord(Customers,Employees,buses);
+        break;
+    case 4:
+        deleteRecordMenu(Customers,Employees,buses);
+        break;
+    }
+}
+
+void askPassword()
+{
+pass:
+    system("cls");
+    int password=1234;
+    int opt;
+    cout<<"\n\n\n\t\t\t\t"<<"Please enter password:"<<endl;
+    cout<<"\t\t\t\t"<<"password:  ";
+    cin>>password;
+    if (password==1234)
+    {
+        system("cls");
+        adminMenu();
+    }
+    else
+    {
+        system("cls");
+        cout<<"\n\t\t\t\t"<<"Incorrect Password! please try again!\n"<<endl;
+        cout<<"\t\t\t\t"<<"press any number to try again and 0 to exit"<<endl;
+        cin>>opt;
+        if(opt==0)
+        {
+            exit;
+        }
+        else
+        {
+            goto pass;
+        }
     }
 
 }
@@ -585,11 +632,20 @@ switch(opt){
 void masterMenu()
 {
     cout<<"\t\t\t"<<"***********************************"<<endl;
-	@@ -549,33 +957,46 @@ void masterMenu()
+    cout<<"\t\t\t\t"<<"WELCOME TO BEST-BUS!"<<endl;
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t"<<"Please choose your clearance level:\n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Administrator\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer"<<endl;
+    int option;
+    cin>>option;
+    switch(option)
+      {
+    case 1:
         askPassword();
         break;
     case 2:
-       book();
+       book(Customers, 4);
     break;
 
     }
