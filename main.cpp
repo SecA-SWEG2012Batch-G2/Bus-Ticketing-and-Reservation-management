@@ -218,30 +218,31 @@ void displayBus(bus information[], int infoSize) {//TAKE BUS STUCTURE ARRAY AND 
             goto empMenu;
       }
     }
-struct customer{
+typedef struct customer
+{
     int CID; //CUSTOMER ID
     string name;// CUSTOMER NAME
     int age; //AGE OF THE CUSTOMER
     string identificationCard; //ID NUMBER OF THE CUSTOMER
     int balance; //THE BALANCE OF THE CUSTOMER
-    char gender;//THE GENDER OF THE CUSTOMER
+    char sex;//THE GENDER OF THE CUSTOMER
     int travelDistance; //THE DISTANCE THAT THE CUSTOMER COVERED BY THE COMPANY SERVICE
-    void inputCustomer(){
-        cout<<"[+] Enter the customer ID: ";
-        cin>>CID;
-        cout<<"[+] Enter the customer name: ";
-        cin>>name;
-        cout<<"[+] Enter the customer age: ";
+    //FUNCTION TO INPUT AND RECORD EMPLOYEE INFORMATION
+void inputCustomer(int cusCounter) //TAKE CUSTOMER COUNT TO AUTOMATICALLY ASSIGN CUSTOMER ID
+    {
+        CID=0+cusCounter;//CUSTOMER'S ID ALWAYS START WITH 6000
+        cout<<"\n\t\t\t Enter the customer name: ";
+        cin.ignore();
+        getline(cin, name);//INPUT FULL NAME OF THE CUSTOMER
+        cout<<"\t\t\t Enter the customer age: ";
         cin>>age;
-        cout<<"[+] Enter the customer balance: ";
-        cin>>balance;
-        cout<<"[+] Enter the customer gender: ";
-        cin>>gender;
-        cout<<"[+] Enter the customer traveled Distance: ";
+        balance=0;
+        cout<<"\t\t\t Enter the customer's sex: ";
+        cin>>sex;
+        cout<<"\t\t\t Enter the customer traveled Distance: ";
         cin>>travelDistance;
     }
-};
-
+} customer;
 struct travelDet{
 	int TID;//TRAVEL DETAIL ID
 	date day;//DATE OF TRAVEL
