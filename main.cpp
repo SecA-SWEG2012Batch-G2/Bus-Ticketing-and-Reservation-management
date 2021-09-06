@@ -190,27 +190,6 @@ struct maintain {
     date maintainDate;//DATE OF ID
 };
 
-void setBooking(Booking &input) {//FUNCTION TO TAKE INPUT OF TICKET BOOKING
-       cout << "Enter the ticket ID: ";
-       cin >> input.TID;
-       cout << "Enter the bus ID: ";
-       cin >> input.BID;
-       cout << "Enter route: ";
-       cin.ignore();
-       getline (cin, input.route, '\n');
-       cout << "Enter price of the trip: ";
-       cin >> input.price;
-       cout << "Enter customer ID: ";
-       cin >> input.CID;
-       cout << "Enter Employee ID: ";
-       cin >> input.EID;
-       cout << "Enter departure date (dd): ";
-       cin >> input.depdate.dd;
-       cout << "Enter departure date (mm): ";
-       cin >> input.depdate.mm;
-       cout << "Enter departure date (yy): ";
-       cin >> input.depdate.yy;
-    }
 void setMaintain(maintain& input) {//FUNCTION TO TAKE INPUT MAINTENANCE DETAIL
     cout << "Enter the bus ID: ";
     cin >> input.BID;
