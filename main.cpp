@@ -336,7 +336,7 @@ searchAgain:
 	
 struct travelDet{//STRUCTURE THAT IS USED TO LOG EVERY TRAVEL MADE USING THE SYSTEM
 	int TID;//TRAVEL DETAIL ID
-	det day;//DATE OF TRAVEL
+	date day;//DATE OF TRAVEL
 	int RID;//ROUTE IT TOOK 
 	int EID;//DRIVER WHO WAS ON THAT SPECIFIC TRAVEL
 	int numberOfCustomers;//NUMBER OF CUSTOMERS PRESENT ON THAT SPECIFIC TRAVEL
@@ -364,24 +364,60 @@ void setMaintain(maintain& input) {//FUNCTION TO TAKE INPUT MAINTENANCE DETAIL
 }
   struct Route{
    int BID; //BUS ID
+   int seatsAva=0;//available seats
+   int seatMax=seatsAva;
    int RID; // ROUTE ID
    string start; //STARTING POINT OR DEPARTURE
-   string End;  // END POINT OR DESTINATION
+   string End=" ";  // END POINT OR DESTINATION
    float distance; // DISTANCE OF TRAVEL
    float price; //PRICE OF TRAVEL
 
-  void setRoute (){     //FUNCTION TO ACCEPT INPUT FROM THE USER
-        cout<<"Enter the bus Id: "<<endl;
+  void setRoute(int routeCount, int busCount, bus busInfo[], bool &busAva){     //FUNCTION TO ACCEPT INPUT FROM THE USER
+        /*cout<<"Enter the bus Id: "<<endl;
         cin>>BID;   // INPUT FOR BUS ID
         cout<<"Enter the Route Id: "<<endl;
-        cin>>RID;  //INPUT FOR ROUTE ID
-        cout<<"Enter departure or the Starting point: "<<endl;
-        cin>>start;   //INPUT FOR DEPARTURE
-        cout<<"Enter destination or the End point: "<<endl;
-        cin>>End;   //INPUT FOR DESTINATION
-        }
-    }
+        cin>>*/
+        BID=0;
+        RID=6000+routeCount;  //INPUT FOR ROUTE ID
+        cout<<"\n Enter departure or the Starting point: ";
+        cin.ignore();
+        getline(cin,start);   //INPUT FOR DEPARTURE
+        cout<<"Enter destination or the  End point: ";
+        cin.ignore();
+        getline(cin,End);   //INPUT FOR DESTINATION
+        cout<<"Enter distance in kilometers: ";
+        cin>>distance;
+        cout<<"Enter price: ";
+        cin>>price;
+        int counter=0;
+        for (int x=0; x<busCount; x++){
+                if (busInfo[x].availability == true && busInfo[x].EID!=0) {
+                    counter++;
+                    if (counter==1) cout<<"\t Available bus \n \t| NO |"<<setw(12)<<"Bus ID     |"<<setw(15)<<" Model |"<<setw(13)<<" Color |"<<setw(5)<<" Odometer |"<<setw(12)<<" Seats|";
+                    cout<<endl<<"\t|"<<setw(3)<<counter<<" |"<<setw(11)<<busInfo[x].BID<<"|"<<setw(13)<<busInfo[x].model<<" |"<<setw(12)<<busInfo[x].color<<"|"<<setw(10)<<busInfo[x].distanceTraveled<<"|"<<setw(11)<<busInfo[x].seats<<"|";
+                    }
 
+                else if (x==(busCount-1) && busInfo[x].availability==false) cout<<"\n\t No Available bus at the moment";
+            }
+        if (counter!=0) {
+            tryagain:
+            cout<<"\n [+] input bus id to assign to the route: ";
+            cin>>counter;
+            for (int x=0; x<busCount;x++) {
+                if (busInfo[x].BID==counter) {
+                    BID=counter;
+                    seatsAva=busInfo[x].seats;
+                    busAva=false;
+                    break;
+                   }
+                 else if (x==busCount-1) {
+                    cout<<"Wrong bus ID! \n";
+                    goto tryagain;
+                       }
+                   }
+              }
+        }
+};
 struct Booking {//TICKET BOOKING STRUCTURE
     int TID;//TICKET ID
     int BID;//BUS ID
