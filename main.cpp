@@ -280,7 +280,7 @@ empMenu://SMALL MENU FOR DISPLAYING CUSTOMER INFORMATION
         char order;
         cout<<"[+] do you want to display in ascending or descending order(a/d)?";
 a:
-        cin>>order;
+        cin>>order;//arranges record ascending or descending order(based on user's input)
         if(order=='a'||order=='A'||order=='d'||order=='D')
         {
             if(order=='a'||order=='A')
@@ -959,7 +959,7 @@ Employees[4] = {4,25,"abel tadesse","abc@gmail.com","Driver","Ets0213/22",'M',{2
 bus buses[5];
 void BusInitializer()
 {
-    //FUNCTION TO INPUT AND RECORD EMPLOYEE INFORMATION
+    //Initialize bus data
 buses[0].BID=1;buses[0].model="Iveco";buses[0].color="blue";buses[0].license="A12456";buses[0].EID=1;buses[0].distanceTraveled=20000;buses[0].MID=1;buses[0].seats=60;buses[0].availability=true;
 buses[1].BID=2;buses[1].model="Iveco";buses[1].color="blue";buses[1].license="A12457";buses[1].EID=2;buses[1].distanceTraveled=20000;buses[1].MID=2;buses[1].seats=60;buses[1].availability=true;
 buses[2].BID=3;buses[2].model="TATA";buses[2].color="blue";buses[2].license="A12458";buses[2].EID=3;buses[2].distanceTraveled=20000;buses[2].MID=3;buses[2].seats=60;buses[2].availability=true;
@@ -967,6 +967,7 @@ buses[3].BID=4;buses[3].model="Iveco";buses[3].color="blue";buses[3].license="A1
 buses[4].BID=5;buses[4].model="Iveco";buses[4].color="blue";buses[4].license="A12460";buses[4].EID=5;buses[4].distanceTraveled=20000;buses[4].MID=5;buses[4].seats=60;buses[4].availability=true;}
 Route routeInfo[4];
 void RoutInit(){
+	//Initialize route data
     routeInfo[0].BID=1;routeInfo[0].seatsAva=60,routeInfo[0].RID=1;routeInfo[0].start="AA";routeInfo[0].End="HA";routeInfo[0].distance=520;routeInfo[0].price=200;
     routeInfo[1].BID=2;routeInfo[1].seatsAva=60,routeInfo[1].RID=2;routeInfo[1].start="AA";routeInfo[1].End="DR";routeInfo[1].distance=500;routeInfo[1].price=180;
     routeInfo[2].BID=3;routeInfo[2].seatsAva=60,routeInfo[2].RID=3;routeInfo[2].start="AA";routeInfo[2].End="BD";routeInfo[2].distance=670;routeInfo[2].price=300;
