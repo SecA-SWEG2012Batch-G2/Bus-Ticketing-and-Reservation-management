@@ -946,6 +946,7 @@ Customers[7] = {7,"dagmawi ketema",22,"Ets3243/22",244,'F',2344};
 Customers[8] = {8,"fikirte belete",33,"Ets0213/22",234,'M',2344};
 Customers[9] = {9,"hewan adane",23,"Ets3243/22",244,'F',2344};
 }
+//Initialize employee sample data
 employeeInfo Employees[5];
 void EmployeeInitializer()
 {
@@ -980,7 +981,8 @@ int prepaid(customer information[], int infoSize) //function used for perpaid ca
     char cont;
 info:
     cout<<"\n[+] Enter the ID of the customer to add prepaid card: ";
-    cin>>CID;
+    cin>>CID;//the customer's id (customer who is updating his prepaid account)
+	//search the customer's record
     for(int i=0; i<infoSize; i++)
     {
         if(information[i].CID==CID)
@@ -989,12 +991,13 @@ info:
             cout<<"\n\t Current balance: "<<information[i].balance<<"\n";
             cout<<"[+]  Enter the amount to add to the prepaid card: ";
             cin>>bal;
-            information[i].balance+=bal;
+            information[i].balance+=bal;//calculate the new balance
             cout<<"    the prepaid balance of the user is "<<information[i].balance<<"\n";
         }
     }
     if(stat==false)
     {
+	    //if invalid id is put, prompt to input customer id again
         cout<<"[-] No customer with that ID, do you want to try again(y/n)?";
         cin>>cont;
         if(cont=='y'||cont=='Y'||cont=='n'||cont=='N')
@@ -1009,7 +1012,7 @@ info:
 }
 
 void adminMenu()
-{
+{//adminstrator's menu
     system("cls");
     tryagain:
     char adminOpt;
@@ -1023,7 +1026,7 @@ void adminMenu()
     cout<<"\t\t\t\t"<<"4.Delete entries\n"<<endl;
     cout<<"\t\t\t\t"<<"5.Recharge Customer's Balance\n"<<endl;
     cin>>adminOpt;
-    switch(adminOpt)
+    switch(adminOpt)//execute user's choice
     {
     case '1':
         insertRecordMenu();
@@ -1056,6 +1059,7 @@ void adminMenu()
         goto tryagain;
         break;
     default:
+		    //prompt again if wrong key is put
         system("cls");
         cout<<"\n\t\t\t\t  !Wrong key! \n\n";
         goto tryagain;
