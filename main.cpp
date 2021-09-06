@@ -161,57 +161,120 @@ struct bus{//STRUCTURE HOLDING THE BUS INFORMATION
     }
 
 };
-//FUNCTION TO DISPLAY BUS INFORMATION
-void displayBus(bus information[], int infoSize) {//TAKE BUS STUCTURE ARRAY AND ITS SIZE AS PARAMETER
-      char command;
-      empMenu://SMALL MENU FOR DISPLAYING BUS INFORMATION
-      cout<<"\tHow would you like to display bus record"<<endl;
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <iomanip>
+#include<windows.h>
+using namespace std;
+
+void insertRecordMenu(); //prototyping
+void adminMenu(); //prototyping
+struct date{
+	int hour, dd, mm, yy;
+};
+// structure to hold employees information
+struct employeeInfo
+{
+    int EID=100000;//EMPLOYEE ID
+    int age;// EMPLOYEE'S AGE
+    string empFullName,email;
+    string position;// POSITION OF THE EMPLOYEE IN THE ORGANIZATION i.e.driver,mechanic
+	@@ -20,9 +24,8 @@ struct employeeInfo
+    int phoneNumber,driverLicenseNo;
+
+    //function to input and record employee information
+void Record_Emp_Info(int empCounter){//TAKE EMPLOYEE COUNT TO AUTOMATICALLY ASSIGN EMPLOYEE ID
+    cout<<"\t\t"<<"Employee Record Input Portal"<<endl;
+	record:
+        cout<<endl<<"\t"<<"Employee Name: ";
+        cin.ignore();
+        getline(cin, empFullName);//TAKE FULL NAME FROM THE USER
+	@@ -32,96 +35,95 @@ void Record_Emp_Info(int empCounter){//TAKE EMPLOYEE COUNT TO AUTOMATICALLY ASSI
+        cin>>sex;
+        cout<<"\t"<<"Employee's National ID: ";
+        cin>>NID;
+        position:
+        cout<<"\t"<<"Employee's Position: ";
+        cin>>position;
+            if(position=="driver" || position=="Driver") {//CHECK IF EMPLOYEE IS DRIVER
+               cout<<"\t"<<"Employee's Driver License Number: ";
+               cin>>driverLicenseNo;
+               EID=1000+empCounter;//DRIVER'S ID ALWAYS START WITH 1000
+             }
+             else if (position=="Teller" || position=="teller") {
+               EID=2000+empCounter;//TELLER'S ID ALWAYS START WITH 2000
+             }
+             else if (position=="Mechanic" || position=="mechanic") {
+                EID=3000+empCounter;//MECHANIC'S ID ALWAYS START WITH 3000
+             }
+             else {
+                cout<<"\n\t\t"<<"Sorry, there is no employee with that position!! \n \n ";
+                goto position;//ONLY HIRE FOR THOSE POSITION ONLY
+             }
+        cout<<"\t"<<"Employee's Phone Number (0912345678): ";
+        cin>>phoneNumber;
+        cout<<"\t"<<"Employee's Email: ";
+        cin>>email;
+        cout<<"\t"<<"Date of employment (dd/mm/yy): ";
+        cin>>empDate.dd>>empDate.mm>>empDate.yy;
+	char button;
+        cout<<endl<<"Would you like to record another employee information? (y/n) : ";
+        cin>>button;
+            if(button=='y'|| button=='Y')
+                {
+                    goto record;
+                }
+            else if(button=='n'||button=='N')
+                {
+                    exit;
+                }
+   }
+
+};
+//FUNCTION TO DISPLAY EMPLOYEE INFORMATION
+void displayEmp(employeeInfo information[],int info_size) {//TAKE EMPLOYEE STRUCTURE ARRAY AND ITS SIZE AS PARAMETER
+        char command;
+        empMenu://SMALL MENU FOR DISPLAYING EMPLOYEE INFORMATION
+      cout<<"\tHow would you like to display employee record"<<endl;
       cout<<"       ________________________________________________________\n";
-      cout<<"       | 1. Display all bus record                             |\n";
-      cout<<"       | 2. Search using bus ID                                |\n";
+      cout<<"       | 1. Display all employee record                        |\n";
+      cout<<"       | 2. Search using employee ID                           |\n";
       cout<<"       | 3. exit                                               |\n";
       cout<<"       |-------------------------------------------------------|\n";
       cin>>command;//INPUT THE COMMAND FROM USER
       switch (command) {//SWITCH USED TO EXECUTE SPECIFIC COMMANDS
         case '1':
-            //TABLE THAT DISPLAY EVERY BUS RECORD
-            cout<<setfill(' ');//FILL THE TABLES EMPTY SPACE WITH THE SPECIFIED CHARACTER
-            cout<<"\t|"<<setw(12)<<"Employee ID |"<<setw(12)<<"Bus ID     |"<<setw(15)<<" Model |"<<setw(13)<<" Color |"<<setw(5)<<" Odometer |"<<setw(12)<<" Seats|";
-            for (int x=0; x<infoSize; x++) {
-                if (information[x].EID==0) {
-                    cout<<endl<<"\t|"<<setw(9)<<"N/A"<<setw(4)<<"  |"<<setw(11)<<information[x].BID<<"|"<<setw(13)<<information[x].model<<" |"<<setw(12)<<information[x].color<<"|"<<setw(10)<<information[x].distanceTraveled<<"|"<<setw(11)<<information[x].seats<<"|";
-                    continue;
-                    }
-                cout<<endl<<"\t|"<<setw(9)<<information[x].EID<<setw(4)<<"  |"<<setw(11)<<information[x].BID<<"|"<<setw(13)<<information[x].model<<" |"<<setw(12)<<information[x].color<<"|"<<setw(10)<<information[x].distanceTraveled<<"|"<<setw(11)<<information[x].seats<<"|";
-              }
+                //TABLE THAT DISPLAY EVERY EMPLOYEE RECORD
+                cout<<setfill(' ');
+                cout<<"\t|"<<setw(12)<<"Employee ID |"<<setw(30)<<"Employee name     "<<setw(10)<<"| Age |"<<setw(13)<<" Position |"<<setw(5)<<" Sex |"<<setw(12)<<" National ID|";
+            for (int x=0; x<info_size; x++) {
+                cout<<endl<<"\t|"<<setw(9)<<information[x].EID<<setw(4)<<"  |"<<setw(33)<<information[x].empFullName<<"|"<<setw(4)<<information[x].age<<" |"<<setw(12)<<information[x].position<<"|"<<setw(5)<<information[x].sex<<"|"<<setw(12)<<information[x].NID<<"|";
+            }
             break;
         case '2':
             int searchId;
             searchEmp:
-            //TABLE THAT DISPLAY DISIRED (SEARCHED) BUS INFORMATION
-            cout<<"Input bus id: ";
+                //TABLE THAT DISPLAY DISIRED (SEARCHED) EMPLOYEE'S INFORMATION
+            cout<<"Input employee id: ";
             cin>>searchId;
-            for (int x=0; x<infoSize; x++) {
-                if (information[x].BID == searchId) {
-                  cout<<"\t|"<<setw(12)<<"Employee ID |"<<setw(12)<<"Bus ID     |"<<setw(15)<<" Model |"<<setw(13)<<" Color |"<<setw(5)<<" Odometer |"<<setw(12)<<" Seats|";
-                    if (information[x].EID==0) {
-                       cout<<endl<<"\t|"<<setw(9)<<"N/A"<<setw(4)<<"  |"<<setw(11)<<information[x].BID<<"|"<<setw(13)<<information[x].model<<" |"<<setw(12)<<information[x].color<<"|"<<setw(10)<<information[x].distanceTraveled<<"|"<<setw(11)<<information[x].seats<<"|";
-                       continue;
-                        }
-                    cout<<endl<<"\t|"<<setw(9)<<information[x].EID<<setw(4)<<"  |"<<setw(11)<<information[x].BID<<"|"<<setw(13)<<information[x].model<<" |"<<setw(12)<<information[x].color<<"|"<<setw(10)<<information[x].distanceTraveled<<"|"<<setw(11)<<information[x].seats<<"|";
+            for (int x=0; x<info_size; x++) {
+                if (information[x].EID == searchId) {
+                    cout<<"\t|"<<setw(12)<<"Employee ID |"<<setw(30)<<"Employee name     "<<setw(10)<<"| Age |"<<setw(13)<<" Position |"<<setw(5)<<" Sex |"<<setw(12)<<" National ID|";
+                    cout<<endl<<"\t|"<<setw(9)<<information[x].EID<<setw(4)<<"  |"<<setw(33)<<information[x].empFullName<<"|"<<setw(4)<<information[x].age<<" |"<<setw(12)<<information[x].position<<"|"<<setw(5)<<information[x].sex<<"|"<<setw(12)<<information[x].NID<<"|";
                     break;
                 }
-                if (x==infoSize-1) cout<<"Bus id not found";
+                if (x==info_size-1)       cout<<"Employee id not found";
             }
             searchAgain:
             cout<<"\n Do you want to search again (y/n)?";//PROPT THE USER TO SEARCH AGAIN
             cin>>command;
             if (command == 'y' || command=='Y' || command=='n' || command=='N') {
-              if (command=='y' ||command=='Y') goto searchEmp;
-                }
+                if (command=='y' ||command=='Y') goto searchEmp;
+            }
             else {
-              cout<<"Wrong key \n";//LOOP BACK TO PROPT IF WRONG KEY IS PRESSED
-              goto searchAgain;
+                cout<<"Wrong key \n";//LOOP BACK TO PROPT IF WRONG KEY IS PRESSED
+                goto searchAgain;
             }
             break;
         case '3':
@@ -221,6 +284,47 @@ void displayBus(bus information[], int infoSize) {//TAKE BUS STUCTURE ARRAY AND 
             goto empMenu;
       }
     }
+struct bus{//STRUCTURE HOLDING THE BUS INFORMATION 
+    int BID; //BUS ID
+    string model; //BUS MODEL
+    string color; //BUS COLOR
+    string license;//BUS LICENSE
+    int EID;// EMPLOYEE ID
+    int distanceTraveled;//DISTANCE THE BUS TRAVELED
+    int MID;// MAINTAINANCE ID
+    int seats;//SEATS ON THE BUS
+    bool availability=true;
+    //FUNCTION TO INPUT AND RECORD EMPLOYEE INFORMATION
+    int inputBus(int busCounter, int empCounter, employeeInfo driverInfo[]){//TAKE BUS COUNT, EMPLOYEE COUNT AND EMPLOYEE INFORMATION
+        int temp=busCounter;
+        BID=4001+temp;//BUS ID ALWAYS START WITH 4000
+        MID=BID+1000;//MAINTENANCE ID ALWAYS START WITH 5000
+        cout<<"\n[+] Enter the bus model: ";
+        cin>>model;
+        cout<<"[+] Enter the bus color: ";
+        cin>>color;
+        cout<<"[+] Enter the distance traveled by bus: ";
+        cin>>distanceTraveled;
+        cout<<"[+] Enter the number of people that the bus can support: ";
+        cin>>seats;
+        for (int x=0; x<empCounter; x++) {//AUTOMATICALLY ASSIGN A DRIVER TO THE BUS IF AVALIABLE
+            if (driverInfo[x].EID<2000) {
+                if (busCounter==0) {
+                        EID=driverInfo[x].EID;
+                        cout<<"Driver assigned!";
+                        break;
+                }
+                busCounter--;
+            }
+            if (x==empCounter-1) {
+                cout<<"There is no driver to be assigned at the moment! \n";
+                EID=0;
+            }
+        }
+    }
+
+};
+//FUNCTION
 typedef struct customer//STRUCTURE HOLDING CUSTOMER INFORMATION 
 {
     int CID; //CUSTOMER ID
@@ -427,13 +531,12 @@ struct Booking {//TICKET BOOKING STRUCTURE
     int CID;//CUSTOMER ID
     int EID;//EMPLOYEE (TELLER) ID
     date depdate;//DATE OF DEPARTURE
-    void printTicket(Route routeInfo[],int routeSiz, customer information[], int infoSize ){
-        //Function that displays the ticket
+        void printTicket(Route routeInfo[],int routeSiz, customer information[], int infoSize ){//Function that displays the ticket
         string name;
-        int identify;//identify on which array the route exist
+        int identify;
         for(int i=0; i<=infoSize; i++){
             if(information[i].CID==CID){
-                name = information[i].name;//prints the name from the customer record
+                name = information[i].name;
             }
         }
         for (int x=0; x<routeSiz; x++) if (routeInfo[x].RID==RID) identify=x;
@@ -449,10 +552,9 @@ struct Booking {//TICKET BOOKING STRUCTURE
         cout<<"\t|"<<setw(9)<<"Price: "<<setw(12)<<price<<setw(36)<<"|\n";
         cout<<"\t|"<<setw(8)<<"Date: "<<setw(8)<<depdate.dd<<"/"<<depdate.mm<<"/"<<depdate.yy<<setw(33)<<"|\n";
         cout<<"\t|_______________________________________________________|\n";
+        //exit(0);
     }
-    //FUNCTION TO TAKE INPUT OF TICKET BOOKING
-    void setBooking(int ticketCount,Route avaRoute[], int routeSize, customer information[], int infoSize) {
-        //take number of tickets, available routes with its array size and customer information with its array size
+	void setBooking(int ticketCount,Route avaRoute[], int routeSize, customer information[], int infoSize) {//take number of tickets, available routes with its array size and customer information with its array size
        TID=7001+ticketCount;//ticket id generator
        int inputRoute,temp;//take which route the customer wanna take
        cout<<endl;
@@ -463,13 +565,11 @@ struct Booking {//TICKET BOOKING STRUCTURE
                     cout<<endl<<"\t|"<<setw(9)<<avaRoute[x].RID<<setw(4)<<"  |"<<setw(11)<<avaRoute[x].BID<<" |"<<setw(13)<<avaRoute[x].start<<" |"<<setw(12)<<avaRoute[x].End<<"|"<<setw(10)<<avaRoute[x].distance<<"|"<<setw(11)<<avaRoute[x].price<<"|"<<setw(11)<<avaRoute[x].seatsAva<<setw(6)<<"|";
                     }
               }
-       tryagain:
-           //prompts again if customer inputs wrong route (routes which are not in the list)
+       tryagain://prompts again if customer inputs wrong route (routes which are not in the list)
             cout<<"\n [+] input Route id to book your ticket: ";
             cin>>inputRoute;//take which route the customer wanna take
             for (int x=0; x<routeSize;x++) {
-                if (avaRoute[x].RID==inputRoute && avaRoute[x].BID!=0) {
-                        //checks if the route entered by the customer is available
+                if (avaRoute[x].RID==inputRoute && avaRoute[x].BID!=0) {//checks if the route entered by the customer is available
                     RID=inputRoute;//assign the route id after it's checked for availability
                     BID=avaRoute[x].BID;//record which bus the customer will be taking
                     price=avaRoute[x].price;//record the price of the trip
@@ -478,8 +578,7 @@ struct Booking {//TICKET BOOKING STRUCTURE
                     temp=x;
                     break;
                    }
-                 else if (x==routeSize-1) {
-                        //check if the route entered by the customer is from the list
+                 else if (x==routeSize-1) {//check if the route entered by the customer is from the list
                     cout<<"Wrong Route id! \n";
                     goto tryagain;//get to try until they get the right one
                        }
@@ -489,8 +588,7 @@ struct Booking {//TICKET BOOKING STRUCTURE
         cout << "\nEnter customer ID: ";//take customer id to buy a ticket and deduct price from balance (if prompted)
        a:cin >> CID;
        bool stt=false;
-       for(int i=0; i<infoSize; i++){
-            //check if the customer is registered or not
+       for(int i=0; i<infoSize; i++){//check if the customer is registered or not
         if(information[i].CID==CID){
             stt=true;
             break;
@@ -505,18 +603,15 @@ struct Booking {//TICKET BOOKING STRUCTURE
           avaRoute[temp].seatsAva++;//revert the number of seats to the original
         }
        }
-       if (counter<3) {
-           //all the function will not take place if correct customer id is not available
+       if (counter<3) {//all the function will not take place if correct customer id is not available
        f:
        cout<<"\t=> Do you want to pay in cash or to be deducted from prepaid account \n\t [+} press 'y' for prepaid \t [+] press 'n' for cash";
        cin>>chs;
-       if(chs=='y'||chs=='Y'||chs=='n'||chs=='N'){
-           //take the price fee from customer's balance or paid in cash
+       if(chs=='y'||chs=='Y'||chs=='n'||chs=='N'){//take the price fee from customer's balance or paid in cash
         if(chs=='y'||chs=='Y'){
             for(int i=0; i<infoSize; i++){
                 if(information[i].CID==CID){
-                    if(information[i].balance>=price){
-                        //check if the customer have enough balance
+                    if(information[i].balance>=price){//check if the customer have enough balance
                         information[i].balance-=price;
                     }
                     else{
@@ -582,47 +677,10 @@ buses[2] = {2,"	Single deck","red","aa13",2,9876,2,20};
 buses[3] = {3,"minibus","blue","ab11",3,7654,3,12};
 buses[4] = {4,"minibus","white","ab12",4,1234,4,12};
 }
-	
-int prepaid(customer information[], int infoSize) //function used for perpaid card
-{
-    int CID, bal;
-    bool stat=false;
-    char cont;
-info:
-    cout<<"\n[+] Enter the ID of the customer to add prepaid card: ";
-    cin>>CID;
-    for(int i=0; i<infoSize; i++)
-    {
-        if(information[i].CID==CID)
-        {
-            stat = true;
-            cout<<"\n\t Current balance: "<<information[i].balance<<"\n";
-            cout<<"[+]  Enter the amount to add to the prepaid card: ";
-            cin>>bal;
-            information[i].balance+=bal;
-            cout<<"    the prepaid balance of the user is "<<information[i].balance<<"\n";
-        }
-    }
-    if(stat==false)
-    {
-        cout<<"[-] No customer with that ID, do you want to try again(y/n)?";
-        cin>>cont;
-        if(cont=='y'||cont=='Y'||cont=='n'||cont=='N')
-        {
-            if(cont=='y'||cont=='Y')
-            {
-                goto info;
-            }
-        }
-
-    }
-}
-	
 void adminMenu()
 {
     system("cls");
-    tryagain:
-    char adminOpt;
+    int adminOpt;
     cout<<"\t\t\t"<<"***********************************"<<endl;
     cout<<"\t\t\t\t"<<"  ADMIN PORTAL"<<endl;
     cout<<"\t\t\t"<<"***********************************\n"<<endl;
@@ -631,44 +689,21 @@ void adminMenu()
     cout<<"\t\t\t\t"<<"2.Edit a record\n"<<endl;
     cout<<"\t\t\t\t"<<"3.Display entries\n"<<endl;
     cout<<"\t\t\t\t"<<"4.Delete entries\n"<<endl;
-    cout<<"\t\t\t\t"<<"5.Recharge Customer's Balance\n"<<endl;
     cin>>adminOpt;
     switch(adminOpt)
     {
-    case '1':
+    case 1:
         insertRecordMenu();
-        system("pause");
-        system ("cls");
-        goto tryagain;
         break;
-    case '2':
+    case 2:
         editRecordMenu(Customers,Employees,buses);
-        system("pause");
-        system ("cls");
-        goto tryagain;
         break;
-    case '3':
+    case 3:
         displayRecord(Customers,Employees,buses);
-        system("pause");
-        system ("cls");
-        goto tryagain;
         break;
-    case '4':
+    case 4:
         deleteRecordMenu(Customers,Employees,buses);
-        system("pause");
-        system ("cls");
-        goto tryagain;
         break;
-    case '5':
-        prepaid(Customers,10);
-        system("pause");
-        system ("cls");
-        goto tryagain;
-        break;
-    default:
-        system("cls");
-        cout<<"\n\t\t\t\t  !Wrong key! \n\n";
-        goto tryagain;
     }
 }
 
@@ -736,33 +771,22 @@ switch(opt){
 }
 void masterMenu()
 {
-    tryagain:
     cout<<"\t\t\t"<<"***********************************"<<endl;
     cout<<"\t\t\t\t"<<"WELCOME TO BEST-BUS!"<<endl;
     cout<<"\t\t\t"<<"***********************************"<<endl;
     cout<<"\t\t\t"<<"Please choose your clearance level:\n"<<endl;
     cout<<"\t\t\t\t"<<"1.Administrator\n"<<endl;
     cout<<"\t\t\t\t"<<"2.Customer"<<endl;
-    char option;
+    int option;
     cin>>option;
     switch(option)
       {
-    case '1':
+    case 1:
         askPassword();
-        system("pause");
-        system ("cls");
-        goto tryagain;
         break;
-    case '2':
+    case 2:
        book(Customers, 4);
-       system("pause");
-        system ("cls");
-        goto tryagain;
-        break;
-    default:
-        system("cls");
-        cout<<"\n\t\t\t\t  !Wrong key! \n\n";
-        goto tryagain;
+    break;
 
     }
 }
