@@ -121,23 +121,40 @@ void displayEmp(employeeInfo information[],int info_size) {//TAKE EMPLOYEE STRUC
 struct bus{
     int BID; //BUS ID
     string model; //BUS MODEL
-	@@ -130,126 +132,479 @@ struct bus{
+    string color; //BUS COLOR
+    string license;//BUS LICENSE
     int EID;// EMPLOYEE ID
     int distanceTraveled;//DISTANCE THE BUS TRAVELED
     int MID;// MAINTAINANCE ID
-    int inputBus(){
-        cout<<"[+] Enter the bus id: ";
-        cin>>BID;
-        cout<<"[+] Enter the bus model: ";
+    int seats;//SEATS ON THE BUS
+    bool availability=true;
+    //FUNCTION TO INPUT AND RECORD EMPLOYEE INFORMATION
+    int inputBus(int busCounter, int empCounter, employeeInfo driverInfo[]){//TAKE BUS COUNT, EMPLOYEE COUNT AND EMPLOYEE INFORMATION
+        int temp=busCounter;
+        BID=4001+temp;//BUS ID ALWAYS START WITH 4000
+        MID=BID+1000;//MAINTENANCE ID ALWAYS START WITH 5000
+        cout<<"\n[+] Enter the bus model: ";
         cin>>model;
         cout<<"[+] Enter the bus color: ";
-        cin>>license;
-        cout<<"[+] Enter the bus driver employee ID: ";
-        cin>>EID;
+        cin>>color;
         cout<<"[+] Enter the distance traveled by bus: ";
         cin>>distanceTraveled;
-        cout<<"[+] Enter the bus maintainance ID: ";
-        cin>>MID;
+        cout<<"[+] Enter the number of people that the bus can support: ";
+        cin>>seats;
+        for (int x=0; x<empCounter; x++) {//AUTOMATICALLY ASSIGN A DRIVER TO THE BUS IF AVALIABLE
+            if (driverInfo[x].EID<2000) {
+                if (busCounter==0) {
+                        EID=driverInfo[x].EID;
+                        cout<<"Driver assigned!";
+                        break;
+                }
+                busCounter--;
+            }
+            if (x==empCounter-1) {
+                cout<<"There is no driver to be assigned at the moment! \n";
+                EID=0;
+            }
+        }
     }
 
 };
