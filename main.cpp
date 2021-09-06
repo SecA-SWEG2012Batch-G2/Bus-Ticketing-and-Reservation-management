@@ -243,6 +243,93 @@ void inputCustomer(int cusCounter) //TAKE CUSTOMER COUNT TO AUTOMATICALLY ASSIGN
         cin>>travelDistance;
     }
 } customer;
+//FUNCTION TO DISPLAY CUSTOMER INFORMATION
+void displayCus (customer information[], int infoSize)  //TAKE CUSTOMER STRUCTURE ARRAY AND ITS SIZE AS PARAMETER
+{
+    char command;
+empMenu://SMALL MENU FOR DISPLAYING CUSTOMER INFORMATION
+    cout<<"\tHow would you like to display customer record"<<endl;
+    cout<<"       ________________________________________________________\n";
+    cout<<"       | 1. Display all customer record                        |\n";
+    cout<<"       | 2. Search using customer ID                           |\n";
+    cout<<"       | 3. exit                                               |\n";
+    cout<<"       |-------------------------------------------------------|\n";
+    cin>>command;//INPUT THE COMMAND FROM USER
+    switch (command)  //SWITCH USED TO EXECUTE SPECIFIC COMMANDS
+    {
+    case '1':
+        //TABLE THAT DISPLAY EVERY customer RECORD
+        char order;
+        cout<<"[+] do you want to display in ascending or descending order(a/d)?";
+a:
+        cin>>order;
+        if(order=='a'||order=='A'||order=='d'||order=='D')
+        {
+            if(order=='a'||order=='A')
+            {
+                cout<<setfill(' ');//FILL THE TABLES EMPTY SPACE WITH THE SPECIFIED CHARACTER
+                cout<<"\n\t__________________________________________________________________________________________\n";
+                cout<<"\t|"<<setw(12)<<"Customer ID |"<<setw(30)<<"Customer name     "<<setw(10)<<"| Age |"<<setw(13)<<" Balance |"<<setw(5)<<" Sex |"<<setw(12)<<" Traveling miles|";
+                for (int x=0; x<infoSize; x++)
+                {
+                    cout<<endl<<"\t|"<<setw(9)<<information[x].CID<<setw(4)<<"  |"<<setw(33)<<information[x].name<<"|"<<setw(4)<<information[x].age<<" |"<<setw(12)<<information[x].balance<<"|"<<setw(5)<<information[x].sex<<"|"<<setw(15)<<information[x].travelDistance<<setw(2)<<"|";
+                }
+                cout<<"\n\t|________________________________________________________________________________________|";
+            }
+            else
+            {
+                cout<<setfill(' ');//FILL THE TABLES EMPTY SPACE WITH THE SPECIFIED CHARACTER
+                cout<<"\n\t__________________________________________________________________________________________\n";
+                cout<<"\t|"<<setw(12)<<"Customer ID |"<<setw(30)<<"Customer name     "<<setw(10)<<"| Age |"<<setw(13)<<" Balance |"<<setw(5)<<" Sex |"<<setw(12)<<" Traveling miles|";
+                for (int x=infoSize-1; x>=0; x--)
+                {
+                    cout<<endl<<"\t|"<<setw(9)<<information[x].CID<<setw(4)<<"  |"<<setw(33)<<information[x].name<<"|"<<setw(4)<<information[x].age<<" |"<<setw(12)<<information[x].balance<<"|"<<setw(5)<<information[x].sex<<"|"<<setw(15)<<information[x].travelDistance<<setw(2)<<"|";
+                }
+                cout<<"\n\t|________________________________________________________________________________________|";
+            }
+        }
+        else
+        {
+            cout<<"[-] Wrong input, input a for ascending or d for descending.";
+            goto a;
+        }
+        break;
+    case '2':
+        int searchId;
+searchEmp:
+        //TABLE THAT DISPLAY DISIRED (SEARCHED) customer INFORMATION
+        cout<<"Input customer id: ";
+        cin>>searchId;
+        for (int x=0; x<infoSize; x++)
+        {
+            if (information[x].CID == searchId)
+            {
+                cout<<"\t|"<<setw(12)<<"Customer ID |"<<setw(30)<<"Customer name     "<<setw(10)<<"| Age |"<<setw(13)<<" Balance |"<<setw(5)<<" Sex |"<<setw(12)<<" Traveling miles|";
+                cout<<endl<<"\t|"<<setw(9)<<information[x].CID<<setw(4)<<"  |"<<setw(33)<<information[x].name<<"|"<<setw(4)<<information[x].age<<" |"<<setw(12)<<information[x].balance<<"|"<<setw(5)<<information[x].sex<<"|"<<setw(15)<<information[x].travelDistance<<setw(2)<<"|";
+                break;
+            }
+            if (x==infoSize-1) cout<<"customer id not found";
+        }
+searchAgain:
+        cout<<"\n Do you want to search again (y/n)?";//PROPT THE USER TO SEARCH AGAIN
+        cin>>command;
+        if (command == 'y' || command=='Y' || command=='n' || command=='N')
+        {
+            if (command=='y' ||command=='Y') goto searchEmp;
+        }
+        else
+        {
+            cout<<"Wrong key \n";//LOOP BACK TO PROPT IF WRONG KEY IS PRESSED
+            goto searchAgain;
+        }
+        break;
+    case '3':
+        break;
+    default:
+        cout<<"Wrong key \n";//LOOP BACK TO PROPT IF WRONG KEY IS PRESSED
+        goto empMenu;
+    }
+}
 struct travelDet{
 	int TID;//TRAVEL DETAIL ID
 	date day;//DATE OF TRAVEL
