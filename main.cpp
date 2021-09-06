@@ -391,7 +391,30 @@ struct Booking {//TICKET BOOKING STRUCTURE
     int CID;//CUSTOMER ID
     int EID;//EMPLOYEE (TELLER) ID
     date depdate;//DATE OF DEPARTURE
-        void setBooking(int ticketCount,Route avaRoute[], int routeSize, customer information[], int infoSize) {//take number of tickets, available routes with its array size and customer information with its array size
+        void printTicket(Route routeInfo[],int routeSiz, customer information[], int infoSize ){//Function that displays the ticket
+        string name;
+        int identify;
+        for(int i=0; i<=infoSize; i++){
+            if(information[i].CID==CID){
+                name = information[i].name;
+            }
+        }
+        for (int x=0; x<routeSiz; x++) if (routeInfo[x].RID==RID) identify=x;
+        cout<<" \n\t________________________________________________________\n";
+        cout<<"\t|                     BUS TICKET                        |\n";
+        cout<<"\t|-------------------------------------------------------|\n";
+        cout<<"\t|"<<setw(14)<<"Ticket ID:"<<setw(7)<<TID<<setw(36)<<" |\n";
+        cout<<"\t|"<<setw(9)<<"Bus ID:"<<setw(7)<<BID<<setw(17)<<"Seat No:"<<seatNum<<setw(21)<<" |\n";
+        cout<<"\t|"<<setw(8)<<"name: "<<setw(17)<<name<<setw(32)<<"|\n";
+        cout<<"\t|"<<setw(14)<<"Customer ID:"<<setw(7)<<CID<<setw(36)<<" |\n";
+        cout<<"\t|"<<setw(9)<<"From:"<<setw(15)<<routeInfo[identify].start<<"    To:"<<setw(15)<<routeInfo[identify].End<<setw(11)<<" |\n";
+        cout<<"\t|"<<setw(11)<<"Route ID:"<<setw(7)<<RID<<setw(39)<<" |\n";
+        cout<<"\t|"<<setw(9)<<"Price: "<<setw(12)<<price<<setw(36)<<"|\n";
+        cout<<"\t|"<<setw(8)<<"Date: "<<setw(8)<<depdate.dd<<"/"<<depdate.mm<<"/"<<depdate.yy<<setw(33)<<"|\n";
+        cout<<"\t|_______________________________________________________|\n";
+        //exit(0);
+    }
+	void setBooking(int ticketCount,Route avaRoute[], int routeSize, customer information[], int infoSize) {//take number of tickets, available routes with its array size and customer information with its array size
        TID=7001+ticketCount;//ticket id generator
        int inputRoute,temp;//take which route the customer wanna take
        cout<<endl;
