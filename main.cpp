@@ -538,6 +538,7 @@ struct Booking {//TICKET BOOKING STRUCTURE
                     }
                     else{
                         cout<<"[-] Insufficient balance, payment will be done in cash!\n";
+			    //if balance not sufficent payment option will be changed to cash
                     }
                 }
             }
@@ -550,17 +551,21 @@ struct Booking {//TICKET BOOKING STRUCTURE
        cout << "Enter departure date (dd): ";
        cin >> depdate.dd;
        if (depdate.dd>31) {
+	       //upper limit of day
             depdate.dd=31;
        }
        else if (depdate.dd<1) {
+	       //lower limit of day
             depdate.dd=1;
        }
        cout << "Enter departure date (mm): ";
        cin >> depdate.mm;
        if (depdate.mm>13) {
+	       //upper limit of month
             depdate.mm=13;
        }
        else if (depdate.mm<1) {
+	       //lower limit of month
             depdate.mm=1;
        }
        cout << "Enter departure date (yy): ";
