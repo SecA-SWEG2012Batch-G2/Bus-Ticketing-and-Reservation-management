@@ -551,12 +551,36 @@ void adminMenu()
     }
 
 }
-void book(){
+void book(customer cuInfo[], int nRoute){
     system("cls");
-cout<<"\t\t\t"<<"***********************************"<<endl;
+opto:cout<<"\t\t\t"<<"***********************************"<<endl;
 cout<<"\t\t\t\t"<<"WELCOME TO BEST-BUS!"<<endl;
 cout<<"\t\t\t"<<"***********************************"<<endl;
-cout<<"\t\t\t"<<"Booking\n"<<endl;
+cout<<"\t\t\t"<<"1. Booking\n"<<endl;
+char opt;
+cin>>opt;
+switch(opt){
+    case '1':
+        int tik;
+        cout<<"[+] Enter the number of tickets you want to have: ";
+        cin>>tik;
+        Booking tickets[tik];
+        for (int x=0; x<tik; x++) {
+            tickets[x].setBooking(x,routeInfo,nRoute,cuInfo,10);
+        }
+        bookExit:cout<<"\t\t\t"<<"***********************************"<<endl;
+        cout<<"\t\t\t"<<"   THANKS FOR CHOOSING BEST-BUS!"<<endl;
+        cout<<"\t\t\t"<<"***********************************"<<endl;
+        cout<<"\t\t\t"<<"1. Go to Main Menu\n"<<endl;
+        cout<<"\t\t\t"<<"0. Exit\n"<<endl;
+        cin>>opt;
+        if (opt == '1')  masterMenu();
+        else if (opt =='0') exit(0);
+        else{
+            cout<<"\tWrong key!/n";
+            goto bookExit;
+            }
+    }
 }
 void masterMenu()
 {
