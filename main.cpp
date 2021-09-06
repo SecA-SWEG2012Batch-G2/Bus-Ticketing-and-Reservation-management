@@ -285,7 +285,7 @@ void setMaintain(maintain& input) {//FUNCTION TO TAKE INPUT MAINTENANCE DETAIL
     cout << "Enter maintenance date (yy): ";
     cin >> input.maintainDate.yy;
 }
- struct Route{
+  struct Route{
    int BID; //BUS ID
    int RID; // ROUTE ID
    string start; //STARTING POINT OR DEPARTURE
@@ -293,18 +293,17 @@ void setMaintain(maintain& input) {//FUNCTION TO TAKE INPUT MAINTENANCE DETAIL
    float distance; // DISTANCE OF TRAVEL
    float price; //PRICE OF TRAVEL
 
-  Route setData(Route input){     //FUNCTION TO ACCEPT INPUT FROM THE USER
-        cout<<"Enter the bus Id: "<<endl;  
-        cin>>input.BID;   // INPUT FOR BUS ID
+  void setRoute (){     //FUNCTION TO ACCEPT INPUT FROM THE USER
+        cout<<"Enter the bus Id: "<<endl;
+        cin>>BID;   // INPUT FOR BUS ID
         cout<<"Enter the Route Id: "<<endl;
-        cin>>input.RID;  //INPUT FOR ROUTE ID
+        cin>>RID;  //INPUT FOR ROUTE ID
         cout<<"Enter departure or the Starting point: "<<endl;
-        cin>>input.start;   //INPUT FOR DEPARTURE
+        cin>>start;   //INPUT FOR DEPARTURE
         cout<<"Enter destination or the End point: "<<endl;
-        cin>>input.End;   //INPUT FOR DESTINATION
+        cin>>End;   //INPUT FOR DESTINATION
         }
-
-};
+    }
 void EditEmployee(employeeInfo employee[]){
     cout<<"Enter employee id: ";
     int Choice;
