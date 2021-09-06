@@ -183,24 +183,24 @@ struct Booking {//TICKET BOOKING STRUCTURE
     date depdate;//DATE OF DEPARTURE
     void setBooking() {//FUNCTION TO TAKE INPUT OF TICKET BOOKING
        cout << "Enter the ticket ID: ";
-       cin >>this->TID;
+       cin >>TID;
        cout << "Enter the bus ID: ";
-       cin >>this->BID;
+       cin >>BID;
        cout << "Enter route: ";
        cin.ignore();
        getline (cin, route, '\n');
        cout << "Enter price of the trip: ";
-       cin >>this->price;
+       cin >>price;
        cout << "Enter customer ID: ";
-       cin >>this->CID;
+       cin >>CID;
        cout << "Enter Employee ID: ";
-       cin >>this->EID;
+       cin >>EID;
        cout << "Enter departure date (dd): ";
-       cin >>this->depdate.dd;
+       cin >>depdate.dd;
        cout << "Enter departure date (mm): ";
-       cin >>this->depdate.mm;
+       cin >>depdate.mm;
        cout << "Enter departure date (yy): ";
-       cin >>this->depdate.yy;
+       cin >>depdate.yy;
     }
 };
 
@@ -341,5 +341,4 @@ Route Terminal,input;
 Terminal.setData(input);
 return 0;
 }
-void insertRecordMenu()
-{
+
