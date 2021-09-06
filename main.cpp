@@ -494,46 +494,405 @@ struct Booking {//TICKET BOOKING STRUCTURE
 
     }
 };
+	void displayRoute(Route information[], int infoSize) {
+    char command;
+      empMenu://SMALL MENU FOR DISPLAYING ROUTES INFORMATION
+      cout<<"\tHow would you like to display route record"<<endl;
+      cout<<"       ________________________________________________________\n";
+      cout<<"       | 1. Display all routes record                          |\n";
+      cout<<"       | 2. Search using routes ID                             |\n";
+      cout<<"       | 3. exit                                               |\n";
+      cout<<"       |-------------------------------------------------------|\n";
+      cin>>command;//INPUT THE COMMAND FROM USER
+      switch (command) {//SWITCH USED TO EXECUTE SPECIFIC COMMANDS
+        case '1':
+            //TABLE THAT DISPLAY EVERY routes RECORD
+            cout<<setfill(' ');//FILL THE TABLES EMPTY SPACE WITH THE SPECIFIED CHARACTER
+            cout<<"\t|"<<setw(13)<<"Route ID |"<<setw(13)<<"Bus ID     |"<<setw(15)<<" Start |"<<setw(13)<<" End |"<<setw(5)<<" Distance |"<<setw(12)<<" Price|"<<setw(17)<<" Available Seats|";
+            for (int x=0; x<infoSize; x++) {
+                if (information[x].BID==0) {
+                    cout<<endl<<"\t|"<<setw(9)<<information[x].RID<<setw(4)<<"  |"<<setw(11)<<" N/A "<<" |"<<setw(13)<<information[x].start<<" |"<<setw(12)<<information[x].End<<"|"<<setw(10)<<information[x].distance<<"|"<<setw(11)<<information[x].price<<"|"<<setw(11)<<information[x].seatsAva<<setw(6)<<"|";
+                    continue;
+                    }
+                cout<<endl<<"\t|"<<setw(9)<<information[x].RID<<setw(4)<<"  |"<<setw(11)<<information[x].BID<<" |"<<setw(13)<<information[x].start<<" |"<<setw(12)<<information[x].End<<"|"<<setw(10)<<information[x].distance<<"|"<<setw(11)<<information[x].price<<"|"<<setw(11)<<information[x].seatsAva<<setw(6)<<"|";
+              }
+            break;
+        case '2':
+            int searchId;
+            searchEmp:
+            //TABLE THAT DISPLAY DISIRED (SEARCHED) routes INFORMATION
+            cout<<"Input routes id: ";
+            cin>>searchId;
+            for (int x=0; x<infoSize; x++) {
+                if (information[x].RID == searchId) {
+                  cout<<"\t|"<<setw(13)<<"Route ID |"<<setw(13)<<"Bus ID     |"<<setw(15)<<" Start |"<<setw(13)<<" End |"<<setw(5)<<" Distance |"<<setw(12)<<" Price|"<<setw(17)<<" Available Seats|";
+                    if (information[x].BID==0) {
+                       cout<<endl<<"\t|"<<setw(9)<<information[x].RID<<setw(4)<<"  |"<<setw(11)<<" N/A "<<" |"<<setw(13)<<information[x].start<<" |"<<setw(12)<<information[x].End<<"|"<<setw(10)<<information[x].distance<<"|"<<setw(11)<<information[x].price<<"|"<<setw(11)<<information[x].seatsAva<<setw(6)<<"|";
+                       break;
+                        }
+                    cout<<endl<<"\t|"<<setw(9)<<information[x].RID<<setw(4)<<"  |"<<setw(11)<<information[x].BID<<" |"<<setw(13)<<information[x].start<<" |"<<setw(12)<<information[x].End<<"|"<<setw(10)<<information[x].distance<<"|"<<setw(11)<<information[x].price<<"|"<<setw(11)<<information[x].seatsAva<<setw(6)<<"|";
+                    break;
+                }
+                if (x==infoSize-1) cout<<"route id not found";
+            }
+            searchAgain:
+            cout<<"\n Do you want to search again (y/n)?";//PROPT THE USER TO SEARCH AGAIN
+            cin>>command;
+            if (command == 'y' || command=='Y' || command=='n' || command=='N') {
+              if (command=='y' ||command=='Y') goto searchEmp;
+                }
+            else {
+              cout<<"Wrong key \n";//LOOP BACK TO PROPT IF WRONG KEY IS PRESSED
+              goto searchAgain;
+            }
+            break;
+        case '3':
+            break;
+        default:
+            cout<<"Wrong key \n";//LOOP BACK TO PROPT IF WRONG KEY IS PRESSED
+            goto empMenu;
+      }
+}
 
+void deleteCustomer(customer information[], int cusSize){
+    int inp;
+    cout<<"[+] Enter the Customer ID to remove it from the list: ";
+    cin>>inp;
+    for(int i=0; i<cusSize; i++){
+        if(inp==information[i].CID){
+            information[i].CID=0;
+            information[i].name="";
+            information[i].identificationCard="";
+            information[i].age=0;
+            information[i].travelDistance=0;
+            information[i].balance=0;
+            cout<<"[+] Customer with id "<<inp<<" has been deleted from the record\n";
+            system("pause");
+        }
+    }
+}
+void deleteEmployee(employeeInfo information[], int empSize){
+    int inp;
+    cout<<"[+] Enter the Employee ID to remove it from the list: ";
+    cin>>inp;
+    for(int i=0; i<empSize; i++){
+        if(inp==information[i].EID){
+            information[i].EID=0;
+            information[i].empFullName="";
+            information[i].email="";
+            information[i].driverLicenseNo=0;
+            information[i].NID="";
+            information[i].position="";
+            cout<<"[+] Employee with id "<<inp<<" has been deleted from the record\n";
+            system("pause");
+        }
+    }
+}
+void deleteBus(bus information[], int busSize){
+    int inp;
+    cout<<"[+] Enter the Bus ID to remove it from the list: ";
+    cin>>inp;
+    for(int i=0; i<busSize; i++){
+        if(inp==information[i].BID){
+            information[i].BID=0;
+            information[i].color="";
+            cout<<"[+] BUS with id "<<inp<<" has been deleted from the record\n";
+            system("pause");
+        }
+    }
+}
 void EditEmployee(employeeInfo employee[]){
     cout<<"Enter employee id: ";
     int Choice;
-	@@ -406,6 +761,39 @@ void EditCustomer(customer Customer[])
+    cin>>Choice;
+    // List of options to edit
+    int EditChoice;
+    cout << endl << "\t\t\t"<<" What would you like to edit?" << endl;
+    cout <<"\t\t\t"<< "  1. Employee Name" << endl;
+    cout <<"\t\t\t"<< "  2. Employee age" << endl;
+    cout <<"\t\t\t"<< "  3. Employee identification " << endl;
+    cout <<"\t\t\t"<< "  4. Employee position" << endl;
+    cout <<"\t\t\t"<< "  5. Employee Sex" << endl;
+    cout <<"\t\t\t"<< "  6. Employee phone number" << endl;
+    cout <<"\t\t\t"<< "  7. Employee Email" << endl;
+    cout <<"\t\t\t"<< "  8. Employee date of employment" << endl;
+    cout <<"\t\t\t"<< endl << " Edit Choice: ";
+    cin >> EditChoice;
+    cout << endl;
+    // Accept new values based on choice
+    switch(EditChoice)
+    {
+    case 1:
+        cout << " Enter Employee Name: ";
+        cin >> employee[Choice].empFullName;
+        break;
+    case 2:
+        cout << " Enter Employee age: ";
+        cin >> employee[Choice].age;
+        break;
+    case 3:
+        cout << "Enter Employee identification: ";
+        cin >> employee[Choice].NID;
+        break;
+    case 4:
+        cout << " Enter Employee driving license number" << endl;
+        cin >> employee[Choice].driverLicenseNo;
+        break;
+    case 5:
+        cout << " Enter Employee Gender: ";
+        cin >> employee[Choice].sex;
+        break;
+    case 6:
+        cout << " Enter Employee phone number: ";
+        cin >> employee[Choice].phoneNumber;
+        break;
+    case 7:
+        cout << " Enter Employee Email: ";
+        cin >> employee[Choice].email;
+        break;
+    case 8:
+        cout << " Enter Employee Date of employment: ";
+        cin >> employee[Choice].empDate.dd;
+        cin >> employee[Choice].empDate.mm;
+        cin >> employee[Choice].empDate.yy;
+        break;
+    }
+    cout<<endl<<"\t----\tEmployee Record Edited Successfully!\t----\n"<<endl<<endl;
+    displayEmp(employee,5);
+    system("pause");
+    system("cls");
+
+}
+void EditBus(bus Bus[]){
+cout<<"Enter bus id: ";
+    int Choice;
+    cin>>Choice;
+    // List of options to edit
+    int EditChoice;
+    cout << endl << "\t\t\t"<<" What would you like to edit?" << endl;
+    cout <<"\t\t\t"<< "  1. Bus Model" << endl;
+    cout <<"\t\t\t"<< "  2. Bus color" << endl;
+    cout <<"\t\t\t"<< "  3. Bus License " << endl;
+    cout <<"\t\t\t"<< "  4. Distance traveled by the bus" << endl;
+    cout <<"\t\t\t"<< "  5. Bus seats" << endl;
+    cout <<"\t\t\t"<< endl << " Edit Choice: ";
+    cin >> EditChoice;
+    cout << endl;
+    // Accept new values based on choice
+    switch(EditChoice)
+    {
+    case 1:
+        cout << " Enter Bus Model: ";
+        cin >> Bus[Choice].model;
+        break;
+    case 2:
+        cout << " Enter Bus Color: ";
+        cin >> Bus[Choice].color;
+        break;
+    case 3:
+        cout << "Enter Bus License: ";
+        cin >> Bus[Choice].license;
+        break;
+    case 4:
+        cout << " Enter Distance traveled by the bus" << endl;
+        cin >> Bus[Choice].distanceTraveled;
+        break;
+    case 5:
+        cout << " Enter Bus seats: ";
+        cin >> Bus[Choice].seats;
+        break;
+    }
+    cout<<endl<<"\t----\tBus Record Edited Successfully!\t----\n"<<endl<<endl;
+    displayBus(Bus,5);
     system("pause");
     system("cls");
 }
-void editRecordMenu(customer Customers[], employeeInfo Employees[], bus buses[])
+void EditCustomer(customer Customer[])
 {
+    cout<<"Enter customers id: ";
+    int Choice;
+    cin>>Choice;
+    // List of options to edit
+    int EditChoice;
+    cout << endl << "\t\t\t"<<" What would you like to edit?" << endl;
+    cout <<"\t\t\t"<< "  1. Customer Name" << endl;
+    cout <<"\t\t\t"<< "  2. Customer age" << endl;
+    cout <<"\t\t\t"<< "  3. Customer identification " << endl;
+    cout <<"\t\t\t"<< "  4. Customer balance" << endl;
+    cout <<"\t\t\t"<< "  5. Customer Sex" << endl;
+    cout <<"\t\t\t"<< "  6. Customer travel distance" << endl;
+    cout <<"\t\t\t"<< endl << " Edit Choice: ";
+    cin >> EditChoice;
+    cout << endl;
+    // Accept new values based on choice
+    switch(EditChoice)
+    {
+    case 1:
+        cout << " Enter Customer Name: ";
+        cin >> Customer[Choice].name;
+        break;
+    case 2:
+        cout << " Enter Customer age: ";
+        cin >> Customer[Choice].age;
+        break;
+    case 3:
+        cout << "Enter Customer identification: ";
+        cin >> Customer[Choice].identificationCard;
+        break;
+    case 4:
+        cout << " Enter Customer balance" << endl;
+        cin >> Customer[Choice].balance;
+        break;
+    case 5:
+        cout << " Enter Customer Gender: ";
+        cin >> Customer[Choice].sex;
+        break;
+    case 6:
+        cout << " Enter Customer travel distance: ";
+        cin >> Customer[Choice].travelDistance;
+        break;
+    }
+    cout<<endl<<"\t----\tCustomer Record Edited Successfully!\t----\n"<<endl<<endl;
+    displayCus(Customer,10);
+    system("pause");
+    system("cls");
+}
+	void displayRecord(customer Customers[], employeeInfo Employees[], bus buses[]){
     int opt;
-	@@ -434,7 +822,7 @@ void editRecordMenu(customer Customers[], employeeInfo Employees[], bus buses[])
+    system("cls");
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"  ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose which record you would like to display: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Employee record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Bus information record\n"<<endl;
+    cout<<"\t\t\t\t"<<"4.Back to previous menu\n"<<endl;
+    cin>>opt;
+    switch(opt)
+    {
+    case 1:
+        displayEmp(Employees, 5);
+        cout<<endl;
+        system("pause");
+        adminMenu();
+        break;
+    case 2:
+        displayCus(Customers, 10);
+        cout<<endl;
+        system("pause");
+        adminMenu();
+        break;
+    case 3:
+        displayBus(buses, 4);
+        cout<<endl;
+        system("pause");
+        adminMenu();
+    case 4:
+        adminMenu();
         break;
     }
 }
-//Initialize Customers default data
+void deleteRecordMenu(customer Customers[], employeeInfo Employees[], bus buses[]){
+    int opt;
+    system("cls");
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"  ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose which record you would like to delete: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Employee record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Bus information record\n"<<endl;
+    cout<<"\t\t\t\t"<<"4.Back to previous menu\n"<<endl;
+    cin>>opt;
+    switch(opt)
+    {
+    case 1:
+        deleteEmployee(Employees, 10);
+        adminMenu();
+        break;
+    case 2:
+        deleteCustomer(Customers,10);
+        adminMenu();
+        break;
+    case 3:
+        deleteBus(buses, 10);
+        adminMenu();
+    case 4:
+        adminMenu();
+        break;
+    }
+}
+
+void editRecordMenu(customer Customers[], employeeInfo Employees[], bus buses[])
+{
+    int opt;
+    system("cls");
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"  ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose which record you would like to edit/modify: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Employee record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Bus information record\n"<<endl;
+    cout<<"\t\t\t\t"<<"4.Back to previous menu\n"<<endl;
+    cin>>opt;
+    switch(opt)
+    {
+    case 1:
+        EditEmployee(Employees);
+        break;
+    case 2:
+        EditCustomer(Customers);
+        break;
+    case 3:
+        EditBus(buses);
+    case 4:
+        adminMenu();
+        break;
+    }
+}
+void masterMenu();
+//Initialize Customers sample data
 customer Customers[10];
 void CustomerInitializer()
 {
-	@@ -449,7 +837,6 @@ Customers[7] = {7,"dagmawi ketema",22,"Ets3243/22",244,'F',2344};
+Customers[0] = {0,"abebe kebede",23,"Ets0213/22",234,'M',2344};
+Customers[1] = {1,"Eden Getachew",29,"Ets3243/22",244,'F',2344};
+Customers[2] = {2,"Solomon Feleke",21,"Ets0213/22",234,'M',2344};
+Customers[3] = {3,"Daniel yohannes",18,"Ets3243/22",244,'F',2344};
+Customers[4] = {4,"abel tadesse",19,"Ets0213/22",234,'M',2344};
+Customers[5] = {5,"Meron tesema",23,"Ets3243/22",244,'F',2344};
+Customers[6] = {6,"lidya geremew",24,"Ets0213/22",234,'M',2344};
+Customers[7] = {7,"dagmawi ketema",22,"Ets3243/22",244,'F',2344};
 Customers[8] = {8,"fikirte belete",33,"Ets0213/22",234,'M',2344};
 Customers[9] = {9,"hewan adane",23,"Ets3243/22",244,'F',2344};
 }
-//Initialize Employees default data
 employeeInfo Employees[5];
 void EmployeeInitializer()
 {
-	@@ -459,15 +846,23 @@ Employees[2] = {2,21,"Solomon Feleke","sss@gmail.com","Driver","Ets0213/22",'M',
+Employees[0]={0,23,"abebe kebede","aaa@gmail.com","teller","Ets0213/22",'M',{2,3,2021},0115535654,2344};
+Employees[1] = {1,29,"Eden Getachew","eee@gmail.com","Driver","Ets0213/22",'M',{2,3,2021},0115535654,2344};
+Employees[2] = {2,21,"Solomon Feleke","sss@gmail.com","Driver","Ets0213/22",'M',{2,3,2021},0115535654,2344};
 Employees[3] = {3,24,"Daniel yohannes","ddd@gmail.com","Driver","Ets0213/22",'M',{2,3,2021},0115535654,2344};
 Employees[4] = {4,25,"abel tadesse","abc@gmail.com","Driver","Ets0213/22",'M',{2,3,2021},0115535654,2344};
 }
-//Initialize Bus default data
 bus buses[5];
 void BusInitializer()
 {
-buses[0] = {0,"	Single deck","red","aa11",0,1223,0,20};
-buses[1] = {1,"	Single deck","white","aa12",1,5678,1,20};
-buses[2] = {2,"	Single deck","red","aa13",2,9876,2,20};
-buses[3] = {3,"minibus","blue","ab11",3,7654,3,12};
-buses[4] = {4,"minibus","white","ab12",4,1234,4,12};
+    //FUNCTION TO INPUT AND RECORD EMPLOYEE INFORMATION
+buses[0].BID=1;buses[0].model="Iveco";buses[0].color="blue";buses[0].license="A12456";buses[0].EID=1;buses[0].distanceTraveled=20000;buses[0].MID=1;buses[0].seats=60;buses[0].availability=true;
+buses[1].BID=2;buses[1].model="Iveco";buses[1].color="blue";buses[1].license="A12457";buses[1].EID=2;buses[1].distanceTraveled=20000;buses[1].MID=2;buses[1].seats=60;buses[1].availability=true;
+buses[2].BID=3;buses[2].model="TATA";buses[2].color="blue";buses[2].license="A12458";buses[2].EID=3;buses[2].distanceTraveled=20000;buses[2].MID=3;buses[2].seats=60;buses[2].availability=true;
+buses[3].BID=4;buses[3].model="Iveco";buses[3].color="blue";buses[3].license="A12459";buses[3].EID=4;buses[3].distanceTraveled=20000;buses[3].MID=4;buses[3].seats=60;buses[3].availability=true;
+buses[4].BID=5;buses[4].model="Iveco";buses[4].color="blue";buses[4].license="A12460";buses[4].EID=5;buses[4].distanceTraveled=20000;buses[4].MID=5;buses[4].seats=60;buses[4].availability=true;}
+Route routeInfo[4];
+void RoutInit(){
+    routeInfo[0].BID=1;routeInfo[0].seatsAva=60,routeInfo[0].RID=1;routeInfo[0].start="AA";routeInfo[0].End="HA";routeInfo[0].distance=520;routeInfo[0].price=200;
+    routeInfo[1].BID=2;routeInfo[1].seatsAva=60,routeInfo[1].RID=2;routeInfo[1].start="AA";routeInfo[1].End="DR";routeInfo[1].distance=500;routeInfo[1].price=180;
+    routeInfo[2].BID=3;routeInfo[2].seatsAva=60,routeInfo[2].RID=3;routeInfo[2].start="AA";routeInfo[2].End="BD";routeInfo[2].distance=670;routeInfo[2].price=300;
+    routeInfo[3].BID=4;routeInfo[3].seatsAva=60,routeInfo[3].RID=4;routeInfo[3].start="AA";routeInfo[3].End="MK";routeInfo[3].distance=800;routeInfo[3].price=400;
+
 }
 
 int prepaid(customer information[], int infoSize) //function used for perpaid card
