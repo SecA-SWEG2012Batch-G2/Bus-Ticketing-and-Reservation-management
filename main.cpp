@@ -251,37 +251,6 @@ struct travelDet{
 	int numberOfCustomers;//NUMBER OF CUSTOMERS PRESENT ON THAT SPECIFIC TRAVEL
 };
 
-struct Booking {//TICKET BOOKING STRUCTURE
-    int TID;//TICKET ID
-    int BID;//BUS ID
-    string route;//ROUTE OF TRAVEL
-    float price;//PRICE OF TRAVEL
-    int CID;//CUSTOMER ID
-    int EID;//EMPLOYEE (TELLER) ID
-    date depdate;//DATE OF DEPARTURE
-    void setBooking() {//FUNCTION TO TAKE INPUT OF TICKET BOOKING
-       cout << "Enter the ticket ID: ";
-       cin >>TID;
-       cout << "Enter the bus ID: ";
-       cin >>BID;
-       cout << "Enter route: ";
-       cin.ignore();
-       getline (cin, route, '\n');
-       cout << "Enter price of the trip: ";
-       cin >>price;
-       cout << "Enter customer ID: ";
-       cin >>CID;
-       cout << "Enter Employee ID: ";
-       cin >>EID;
-       cout << "Enter departure date (dd): ";
-       cin >>depdate.dd;
-       cout << "Enter departure date (mm): ";
-       cin >>depdate.mm;
-       cout << "Enter departure date (yy): ";
-       cin >>depdate.yy;
-    }
-};
-
 struct maintain {
     int BID;//BUS ID
     int EID;//EMPLOYEE ID
@@ -322,6 +291,92 @@ void setMaintain(maintain& input) {//FUNCTION TO TAKE INPUT MAINTENANCE DETAIL
         cin>>End;   //INPUT FOR DESTINATION
         }
     }
+
+struct Booking {//TICKET BOOKING STRUCTURE
+    int TID;//TICKET ID
+    int BID;//BUS ID
+    int RID;//ROUTE ID
+    int seatNum;//seat number
+    float price;//PRICE OF TRAVEL
+    int CID;//CUSTOMER ID
+    int EID;//EMPLOYEE (TELLER) ID
+    date depdate;//DATE OF DEPARTURE
+    void setBooking(int ticketCount,Route avaRoute[], int routeSize, customer information[], int infoSize) {//take number of tickets, available routes with its array size and customer information with its array size
+       TID=7001+ticketCount;//ticket id generator
+       int inputRoute;//take which route the customer wanna take
+       cout<<endl;
+       //outputs the available routes (routes which have assigned driver and bus)
+       cout<<"\t|"<<setw(13)<<"Route ID |"<<setw(13)<<"Bus ID     |"<<setw(15)<<" Start |"<<setw(13)<<" End |"<<setw(5)<<" Distance |"<<setw(12)<<" Price|"<<setw(17)<<" Available Seats|";
+            for (int x=0; x<routeSize; x++) {
+                if (avaRoute[x].BID!=0) {
+                    cout<<endl<<"\t|"<<setw(9)<<avaRoute[x].RID<<setw(4)<<"  |"<<setw(11)<<avaRoute[x].BID<<" |"<<setw(13)<<avaRoute[x].start<<" |"<<setw(12)<<avaRoute[x].End<<"|"<<setw(10)<<avaRoute[x].distance<<"|"<<setw(11)<<avaRoute[x].price<<"|"<<setw(11)<<avaRoute[x].seatsAva<<setw(6)<<"|";
+                    }
+              }
+       tryagain://prompts again if customer inputs wrong route (routes which are not in the list)
+            cout<<"\n [+] input Route id to book your ticket: ";
+            cin>>inputRoute;//take which route the customer wanna take
+            for (int x=0; x<routeSize;x++) {
+                if (avaRoute[x].RID==inputRoute && avaRoute[x].BID!=0) {//checks if the route entered by the customer is available
+                    RID=inputRoute;//assign the route id after it's checked for availability
+                    BID=avaRoute[x].BID;//record which bus the customer will be taking
+                    price=avaRoute[x].price;//record the price of the trip
+                    avaRoute[x].seatsAva--;//update available seats since seat is assigned for customer
+                    seatNum=avaRoute[x].seatMax-avaRoute[x].seatsAva;//which seat will the customer be taking
+                    break;
+                   }
+                 else if (x==routeSize-1) {//check if the route entered by the customer is from the list
+                    cout<<"Wrong Route id! \n";
+                    goto tryagain;
+                       }
+                   }
+       char chs;
+       int counter=0;
+        cout << "\nEnter customer ID: ";
+       a:cin >> CID;
+       bool stt=false;
+       for(int i=0; i<infoSize; i++){
+        if(information[i].CID==CID){
+            stt=true;
+            break;
+        }
+       }
+       if(stt==false){
+        cout<<"[-] No customer with that ID, please enter valid ID: ";
+        counter++;
+        if (counter<3) goto a;
+        else cout<<"\n\tToo many attempts!\n";
+       }
+       break;
+       f:
+       cout<<"\t=> Do you want to pay in cash or to be deducted from prepaid account \n\t [+} press 'y' for prepaid \t [+] press 'n' for cash";
+       cin>>chs;
+       if(chs=='y'||chs=='Y'||chs=='n'||chs=='N'){
+        if(chs=='y'||chs=='Y'){
+            for(int i=0; i<infoSize; i++){
+                if(information[i].CID==CID){
+                    if(information[i].balance>=price){
+                        information[i].balance-=price;
+                    }
+                    else{
+                        cout<<"[-] Insufficient balance, payment will be done in cash!\n";
+                    }
+                }
+            }
+        }
+       }
+       else{
+        goto f;
+       }
+       cout << "Enter departure date (dd): ";
+       cin >> depdate.dd;
+       cout << "Enter departure date (mm): ";
+       cin >> depdate.mm;
+       cout << "Enter departure date (yy): ";
+       cin >> depdate.yy;
+       printTicket(avaRoute,routeSize,information,infoSize);
+    }
+};
+
 void EditEmployee(employeeInfo employee[]){
     cout<<"Enter employee id: ";
     int Choice;
