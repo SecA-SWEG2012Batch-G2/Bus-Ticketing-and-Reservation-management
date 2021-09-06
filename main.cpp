@@ -151,17 +151,17 @@ struct customer{
     int travelDistance; //THE DISTANCE THAT THE CUSTOMER COVERED BY THE COMPANY SERVICE
     void inputCustomer(){
         cout<<"[+] Enter the customer ID: ";
-        cin>>this->CID;
+        cin>>CID;
         cout<<"[+] Enter the customer name: ";
-        cin>>this->name;
+        cin>>name;
         cout<<"[+] Enter the customer age: ";
-        cin>>this->age;
+        cin>>age;
         cout<<"[+] Enter the customer balance: ";
-        cin>>this->balance;
+        cin>>balance;
         cout<<"[+] Enter the customer gender: ";
-        cin>>this->gender;
+        cin>>gender;
         cout<<"[+] Enter the customer traveled Distance: ";
-        cin>>this->travelDistance;
+        cin>>travelDistance;
     }
 };
 
