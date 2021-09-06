@@ -141,6 +141,66 @@ struct bus{
     }
 
 };
+//FUNCTION TO DISPLAY BUS INFORMATION
+void displayBus(bus information[], int infoSize) {//TAKE BUS STUCTURE ARRAY AND ITS SIZE AS PARAMETER
+      char command;
+      empMenu://SMALL MENU FOR DISPLAYING BUS INFORMATION
+      cout<<"\tHow would you like to display bus record"<<endl;
+      cout<<"       ________________________________________________________\n";
+      cout<<"       | 1. Display all bus record                             |\n";
+      cout<<"       | 2. Search using bus ID                                |\n";
+      cout<<"       | 3. exit                                               |\n";
+      cout<<"       |-------------------------------------------------------|\n";
+      cin>>command;//INPUT THE COMMAND FROM USER
+      switch (command) {//SWITCH USED TO EXECUTE SPECIFIC COMMANDS
+        case '1':
+            //TABLE THAT DISPLAY EVERY BUS RECORD
+            cout<<setfill(' ');//FILL THE TABLES EMPTY SPACE WITH THE SPECIFIED CHARACTER
+            cout<<"\t|"<<setw(12)<<"Employee ID |"<<setw(12)<<"Bus ID     |"<<setw(15)<<" Model |"<<setw(13)<<" Color |"<<setw(5)<<" Odometer |"<<setw(12)<<" Seats|";
+            for (int x=0; x<infoSize; x++) {
+                if (information[x].EID==0) {
+                    cout<<endl<<"\t|"<<setw(9)<<"N/A"<<setw(4)<<"  |"<<setw(11)<<information[x].BID<<"|"<<setw(13)<<information[x].model<<" |"<<setw(12)<<information[x].color<<"|"<<setw(10)<<information[x].distanceTraveled<<"|"<<setw(11)<<information[x].seats<<"|";
+                    continue;
+                    }
+                cout<<endl<<"\t|"<<setw(9)<<information[x].EID<<setw(4)<<"  |"<<setw(11)<<information[x].BID<<"|"<<setw(13)<<information[x].model<<" |"<<setw(12)<<information[x].color<<"|"<<setw(10)<<information[x].distanceTraveled<<"|"<<setw(11)<<information[x].seats<<"|";
+              }
+            break;
+        case '2':
+            int searchId;
+            searchEmp:
+            //TABLE THAT DISPLAY DISIRED (SEARCHED) BUS INFORMATION
+            cout<<"Input bus id: ";
+            cin>>searchId;
+            for (int x=0; x<infoSize; x++) {
+                if (information[x].BID == searchId) {
+                  cout<<"\t|"<<setw(12)<<"Employee ID |"<<setw(12)<<"Bus ID     |"<<setw(15)<<" Model |"<<setw(13)<<" Color |"<<setw(5)<<" Odometer |"<<setw(12)<<" Seats|";
+                    if (information[x].EID==0) {
+                       cout<<endl<<"\t|"<<setw(9)<<"N/A"<<setw(4)<<"  |"<<setw(11)<<information[x].BID<<"|"<<setw(13)<<information[x].model<<" |"<<setw(12)<<information[x].color<<"|"<<setw(10)<<information[x].distanceTraveled<<"|"<<setw(11)<<information[x].seats<<"|";
+                       continue;
+                        }
+                    cout<<endl<<"\t|"<<setw(9)<<information[x].EID<<setw(4)<<"  |"<<setw(11)<<information[x].BID<<"|"<<setw(13)<<information[x].model<<" |"<<setw(12)<<information[x].color<<"|"<<setw(10)<<information[x].distanceTraveled<<"|"<<setw(11)<<information[x].seats<<"|";
+                    break;
+                }
+                if (x==infoSize-1) cout<<"Bus id not found";
+            }
+            searchAgain:
+            cout<<"\n Do you want to search again (y/n)?";//PROPT THE USER TO SEARCH AGAIN
+            cin>>command;
+            if (command == 'y' || command=='Y' || command=='n' || command=='N') {
+              if (command=='y' ||command=='Y') goto searchEmp;
+                }
+            else {
+              cout<<"Wrong key \n";//LOOP BACK TO PROPT IF WRONG KEY IS PRESSED
+              goto searchAgain;
+            }
+            break;
+        case '3':
+            break;
+        default:
+            cout<<"Wrong key \n";//LOOP BACK TO PROPT IF WRONG KEY IS PRESSED
+            goto empMenu;
+      }
+    }
 struct customer{
     int CID; //CUSTOMER ID
     string name;// CUSTOMER NAME
@@ -341,4 +401,3 @@ Route Terminal,input;
 Terminal.setData(input);
 return 0;
 }
-
