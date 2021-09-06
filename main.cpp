@@ -121,7 +121,7 @@ void displayEmp(employeeInfo information[],int info_size) {//TAKE EMPLOYEE STRUC
             goto empMenu;
       }
     }
-struct bus{
+struct bus{//STRUCTURE HOLDING THE BUS INFORMATION 
     int BID; //BUS ID
     string model; //BUS MODEL
     string color; //BUS COLOR
@@ -221,7 +221,7 @@ void displayBus(bus information[], int infoSize) {//TAKE BUS STUCTURE ARRAY AND 
             goto empMenu;
       }
     }
-typedef struct customer
+typedef struct customer//STRUCTURE HOLDING CUSTOMER INFORMATION 
 {
     int CID; //CUSTOMER ID
     string name;// CUSTOMER NAME
