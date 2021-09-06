@@ -333,12 +333,18 @@ searchAgain:
         goto empMenu;
     }
 }
+	struct date{
+int dd,mm,yy;
+};
 struct travelDet{
-	int TID;//TRAVEL DETAIL ID
-	date day;//DATE OF TRAVEL
-	int RID;//ROUTE IT TOOK 
-	int EID;//DRIVER WHO WAS ON THAT SPECIFIC TRAVEL
-	int numberOfCustomers;//NUMBER OF CUSTOMERS PRESENT ON THAT SPECIFIC TRAVEL
+int TID;//traveler id
+int EID;//employee id
+int BID;//bus id
+int n;//number of customers
+string route;
+
+
+
 };
 
 struct maintain {
