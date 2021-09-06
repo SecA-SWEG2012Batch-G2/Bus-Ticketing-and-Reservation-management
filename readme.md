@@ -23,7 +23,7 @@ This is a system to manage and automate bus ticket systems. It will consist of a
 
 > Navigate to it by the terminal 
 ```cmd
-  cd "C:/Supermarket Management System"
+  cd "C:/Bus Ticketing and Reservation Management System"
 ```
 
 > Clone this repo to the current directory
