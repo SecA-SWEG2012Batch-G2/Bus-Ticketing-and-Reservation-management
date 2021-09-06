@@ -181,6 +181,27 @@ struct Booking {//TICKET BOOKING STRUCTURE
     int CID;//CUSTOMER ID
     int EID;//EMPLOYEE (TELLER) ID
     date depdate;//DATE OF DEPARTURE
+    void setBooking() {//FUNCTION TO TAKE INPUT OF TICKET BOOKING
+       cout << "Enter the ticket ID: ";
+       cin >>this->TID;
+       cout << "Enter the bus ID: ";
+       cin >>this->BID;
+       cout << "Enter route: ";
+       cin.ignore();
+       getline (cin, route, '\n');
+       cout << "Enter price of the trip: ";
+       cin >>this->price;
+       cout << "Enter customer ID: ";
+       cin >>this->CID;
+       cout << "Enter Employee ID: ";
+       cin >>this->EID;
+       cout << "Enter departure date (dd): ";
+       cin >>this->depdate.dd;
+       cout << "Enter departure date (mm): ";
+       cin >>this->depdate.mm;
+       cout << "Enter departure date (yy): ";
+       cin >>this->depdate.yy;
+    }
 };
 
 struct maintain {
