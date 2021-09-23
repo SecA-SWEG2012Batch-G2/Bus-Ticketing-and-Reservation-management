@@ -1745,3 +1745,16 @@ void rechargeBal() {
     cin>>amount;
     recharge(id,amount);
 }
+void deleteRecordMenu(){
+    char opt;
+    system("cls");
+    tryagain:
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"  ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose which record you would like to delete: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Employee record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Bus information record\n"<<endl;
+    cout<<"\t\t\t\t"<<"4.Back to previous menu\n"<<endl;
+    cin>>opt;
