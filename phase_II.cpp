@@ -224,3 +224,90 @@ struct customer{
         CID=1;
     }
 };
+
+struct Route{
+   int BID; //BUS ID
+   int RID=1; // ROUTE ID
+   string start; //STARTING POINT OR DEPARTURE
+   string End=" ";  // END POINT OR DESTINATION
+   float distance; // DISTANCE OF TRAVEL
+   float price; //PRICE OF TRAVEL
+   bool assignedBus=false, driverAva=true;
+   void inputroute () {
+        int counter=1,cou=0;
+        string temp,temp2,temp3;
+        ifstream setId("route.txt",ios::app);
+        char pos,line[100],line2[100];
+        while(setId.getline(line,100)!= NULL) RID++;
+        setId.close();
+        ifstream busID("bus.txt",ios::app);
+        while(busID.getline(line, 100)) {
+        char *ptr = strtok(line,",");
+        while (ptr!=NULL) {
+            if (cou==2) break;
+            ofstream registr("temp.txt",ios::app);
+            registr<<ptr;
+            if (cou==0) registr<<",";
+            else registr<<"\n";
+            ptr = strtok(NULL,",");
+            cou++;
+            }
+        cou=0;
+        }
+        busID.close();
+        cout<<"\n Enter departure or the Starting point: ";
+        cin.ignore();
+        getline(cin>>ws,start);   //INPUT FOR DEPARTURE
+        cout<<"Enter destination or the  End point: ";
+        cin.ignore();
+        getline(cin>>ws,End);   //INPUT FOR DESTINATION
+        cout<<"Enter distance in kilometers: ";
+        cin>>distance;
+        cout<<"Enter price: ";
+        cin>>price;
+        ofstream routeInfo( "routeRec.txt", ios::app);
+        if(!routeInfo.is_open()) {
+            cout<<"[-] Unable to open log file.";
+        }
+        driverAva=true;
+        ifstream registr("temp.txt",ios::app);
+        while(registr.getline(line2, 100)){
+                cout<<"##"<<line2<<"##\n";
+                temp3=line2;
+                driverAva=true;
+                char *ptr1 = strtok(line2,",");
+                ifstream assignedBusId("route.txt",ios::app);
+                while(assignedBusId.getline(line, 100)) {
+                    char *ptr = strtok(line,",");
+                    while(ptr != NULL){
+                       if (counter == 2) {
+                           temp=ptr;
+                           temp2=ptr1;
+                           if(temp==temp2) driverAva=false;
+                          }
+                       ptr = strtok(NULL,",");
+                       counter++;
+                       }
+                       counter=1;
+                     }
+                    if (driverAva==true) {
+                        ptr1=line2;
+                       routeInfo<<"R"<<RID<<","<<temp3<<","<<start<<","<<End<<","<<distance<<","<<price<<"\n";
+                       cout<<"\t\t\t[+] Successfully added route information and assigned bus";
+                       assignedBus=true;
+                       break;
+                        }
+                        ptr1 = strtok(NULL,",");
+                    }
+        registr.close();
+        if (assignedBus==false) {
+            routeInfo<<"R"<<RID<<","<<"N/A"<<","<<"N/A"<<","<<start<<","<<End<<","<<distance<<","<<price<<"\n";
+            routeInfo.close();
+            cout<<"\t\t\t[+] Successfully added route information and could not assign bus";
+           }
+        RID=1;
+        ofstream clearRegister("temp.txt",ios::trunc);
+        clearRegister.close();
+        assignedBus=false;
+   }
+};
