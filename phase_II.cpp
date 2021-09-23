@@ -887,3 +887,49 @@ void delEmp(string id){
     }
     system("pause");
 }
+void delBus(string id){//This will delete bus from the file
+    char line[100];
+    int cou=0;
+    fstream myFile;
+    myFile.open("bus.txt", ios::in);
+    fstream temp("tmp.txt", ios::out);
+    while(myFile.getline(line, 100))
+    {
+        char *ptr = strtok(line,",");
+        bool stat=true;
+        while(ptr != NULL){
+
+            if(cou==0){
+                if(id== tostr(ptr)){
+                    stat=false;
+                }
+            }
+            if(stat==true){
+                temp<<ptr;
+                if(cou!=5){
+                 temp<<",";
+                }
+            }
+            ptr = strtok(NULL,",");
+            cou++;
+        }
+        if(stat==true){
+            temp<<"\n";
+        }
+        stat=true;
+        cou=0;
+        cout<<endl;
+    }
+    temp.close();
+    myFile.close();
+    ofstream fasa("bus.txt");
+    fasa.close();
+    ofstream ne("bus.txt");
+    string hol;
+    ifstream rr("tmp.txt");
+    while(rr.getline(line, 100)){
+        ne<<line<<"\n";
+    }
+    system("pause");
+}
+
