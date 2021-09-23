@@ -1492,3 +1492,29 @@ void masterMenu()
 
     }
 }
+void book(){
+    system("cls");
+opto:cout<<"\t\t\t"<<"***********************************"<<endl;
+cout<<"\t\t\t\t"<<"WELCOME TO BEST-BUS!"<<endl;
+cout<<"\t\t\t"<<"***********************************"<<endl;
+cout<<"\t\t\t"<<"1. Booking\n"<<endl;
+char opt;
+cin>>opt;
+switch(opt){
+    case '1':
+        customerVerify();
+        bookExit:cout<<"\t\t\t"<<"***********************************"<<endl;
+        cout<<"\t\t\t"<<"   THANKS FOR CHOOSING BEST-BUS!"<<endl;
+        cout<<"\t\t\t"<<"***********************************"<<endl;
+        cout<<"\t\t\t"<<"1. Go to Main Menu\n"<<endl;
+        cout<<"\t\t\t"<<"0. Exit\n"<<endl;
+        cin>>opt;
+        if (opt == '1')  masterMenu();
+        else if (opt =='0') exit(0);
+        else{
+            cout<<"\tWrong key!/n";
+            goto bookExit;
+            }
+    }
+}
+
