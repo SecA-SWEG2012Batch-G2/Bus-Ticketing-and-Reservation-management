@@ -1166,3 +1166,52 @@ void editEmpPrompt(){//this function is called when u want to edit bus
     editEmp(id, loca, loc1);
 }
 
+void editCust(string id, char *ammount, int loc){
+    char line[100];
+    int cou=0;
+    fstream myFile;
+    myFile.open("employee.txt", ios::in);
+    fstream temp("tmp.txt", ios::out);
+    while(myFile.getline(line, 100))
+    {
+        char *ptr = strtok(line,",");
+        bool stat=true,stat2=false;
+        while(ptr != NULL){
+            if(stat==true){
+                if(cou==0){
+                    if(id== tostr(ptr)){
+                        stat2=true;
+                    }
+                }
+            if(stat2==true){
+                if(cou==loc){
+                    ptr= ammount;
+                }
+            }
+                temp<<ptr;
+                if(cou!=5){
+                 temp<<",";
+                }
+            }
+            ptr = strtok(NULL,",");
+            cou++;
+        }
+        if(stat==true){
+            temp<<"\n";
+        }
+        stat=true;
+        cou=0;
+        cout<<endl;
+
+    }
+        temp.close();
+        myFile.close();
+        ofstream fasa("customer.txt");
+        fasa.close();
+        ofstream ne("customer.txt");
+        string hol;
+        ifstream rr("tmp.txt");
+        while(rr.getline(line, 100)){
+            ne<<line<<"\n";
+        }
+}
