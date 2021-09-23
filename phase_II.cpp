@@ -457,3 +457,77 @@ void customerVerify () {
         ofstream clrregistr("temp.txt",ios::trunc);
         clrregistr.close();
 }
+
+void displayEmp()  //Will display employee
+{
+    char line[300];
+    fstream information;
+    information.open("employee.txt", ios::in);
+    if (!information.is_open()) {
+        system("cls");
+        cout<<"       [-] Log file is not found";
+        system("pause");
+        goto empMenu;
+    }
+
+    char command;
+empMenu://SMALL MENU FOR DISPLAYING BUS INFORMATION
+    cout<<"\tHow would you like to display bus record"<<endl;
+    cout<<"       ________________________________________________________\n";
+    cout<<"       | 1. Display all employee record                        |\n";
+    cout<<"       | 2. Search employee                                    |\n";
+    cout<<"       | 3. exit                                               |\n";
+    cout<<"       |-------------------------------------------------------|\n";
+    cin>>command;//INPUT THE COMMAND FROM USER
+    int spaces[]={11,10,10,25,10,12,10,10,3,3,20,15}, cou=0;
+   if(command=='1'){
+        //TABLE THAT DISPLAY EVERY BUS RECORD
+        cout<<setfill(' ');//FILL THE TABLES EMPTY SPACE WITH THE SPECIFIED CHARACTER
+        cout<<setw(12)<<"Employee ID |"<<setw(10)<<"Age"<<setw(10)<<"| Full name |"<<setw(20)<<" Email |"<<setw(5)<<" Position |"<<setw(12)<<" National ID|"<<setw(12)<<" sex|"<<setw(16)<<" date|"<<setw(16)<<" Phone|"<<setw(16)<<" License|\n";
+        char line[300];
+        fstream myFile;
+        myFile.open("employee.txt", ios::in);
+
+        while(information.getline(line, 300))
+        {
+            char *ptr = strtok(line,",");
+            while(ptr != NULL){
+                cout<<setw(spaces[cou])<<ptr;
+                ptr = strtok(NULL,",");
+                cou++;
+            }
+            cou=0;
+            cout<<endl;
+        }
+        system("pause");
+   }
+    else if(command=='2'){
+        string ser;
+        cout<<"[+] Enter the search term, it can be name,ID, email or any other attribute: ";
+        cin>>ser;
+        char line[300];
+        fstream myFile;
+        myFile.open("employee.txt", ios::in);
+        cout<<setfill(' ');
+
+        cout<<setw(12)<<"Employee ID |"<<setw(10)<<"Age"<<setw(10)<<"| Full name |"<<setw(20)<<" Email |"<<setw(5)<<" Position |"<<setw(12)<<" National ID|"<<setw(12)<<" sex|"<<setw(16)<<" date|"<<setw(16)<<" Phone|"<<setw(16)<<" License|\n";
+        while(myFile.getline(line, 300))
+        {
+            string hol= tostr(line);
+            if(hol.find(ser) != string::npos){
+
+                char *ptr = strtok(line,",");
+                while(ptr != NULL){
+                   cout<<setw(spaces[cou])<<ptr;
+                    ptr = strtok(NULL,",");
+                    cou++;
+                }
+                cou=0;
+                cout<<endl;
+            }
+
+        }
+        system("pause");
+    }
+
+}
