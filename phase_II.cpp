@@ -1758,3 +1758,27 @@ void deleteRecordMenu(){
     cout<<"\t\t\t\t"<<"3.Bus information record\n"<<endl;
     cout<<"\t\t\t\t"<<"4.Back to previous menu\n"<<endl;
     cin>>opt;
+    switch(opt)
+    {
+    case '1':
+        deleteEmp();
+        adminMenu();
+        break;
+    case '2':
+        deleteCus();
+        adminMenu();
+        break;
+    case '3':
+        deleteBus();
+        adminMenu();
+    case '4':
+        adminMenu();
+        break;
+    default:
+        cout<<"\tWrong key!/n";
+        system("pause");
+        system ("cls");
+        goto tryagain;
+    }
+}
+
