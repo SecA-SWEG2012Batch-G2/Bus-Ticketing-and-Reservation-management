@@ -1518,3 +1518,9 @@ switch(opt){
     }
 }
 
+int main(){
+    system("Color 0B");
+    setup();
+    masterMenu();
+
+}
