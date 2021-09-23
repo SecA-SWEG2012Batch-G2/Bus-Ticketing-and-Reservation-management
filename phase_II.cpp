@@ -112,3 +112,79 @@ position:
         EID=1;
     }
 };
+
+struct bus{
+    int BID=1; //BUS ID
+    string model; //BUS MODEL
+    string color; //BUS COLOR
+    string license;//BUS LICENSE
+    int distanceTraveled;//DISTANCE THE BUS TRAVELED
+    int MID;// MAINTAINANCE ID
+    int seats;//SEATS ON THE BUS
+    bool assignedDriver=false, driverAva=true;
+    void inputBus(){
+        int counter=1,lineCounter=1;
+        string temp,temp2;
+        ifstream setId("bus.txt",ios::app);
+        char line[100],line2[100];
+        while(setId.getline(line,100)!= NULL) BID++;
+        setId.close();
+        ifstream empId("employee.txt",ios::app);
+        while(empId.getline(line, 100)) {
+        char *ptr = strtok(line,",");
+        if (ptr[1] == 'D') {
+            ofstream registr("temp.txt",ios::app);
+            registr<<ptr<<"\n";
+            }
+        ptr = strtok(NULL,",");
+        }
+        empId.close();
+        cout<<"\n[+] Enter the bus model: ";
+        cin>>model;
+        cout<<"[+] Enter the bus color: ";
+        cin>>color;
+        cout<<"[+] Enter the distance traveled by bus: ";
+        cin>>distanceTraveled;
+        cout<<"[+] Enter the number of people that the bus can support: ";
+        cin>>seats;
+        ofstream busInfo( "bus.txt", ios::app);
+        if(!busInfo.is_open()) {
+            cout<<"[-] Unable to open log file.";
+        }
+        driverAva=true;
+        ifstream driverId("temp.txt",ios::app);
+        while(driverId.getline(line2, 100)){
+                driverAva=true;
+                ifstream assignedEmpId("bus.txt",ios::app);
+                while(assignedEmpId.getline(line, 100)) {
+                    char *ptr = strtok(line,",");
+                    while(ptr != NULL){
+                       if (counter == 2) {
+                           temp=ptr;
+                           temp2=line2;
+                           if(temp==temp2) driverAva=false;
+                          }
+                       ptr = strtok(NULL,",");
+                       counter++;
+                       }
+                       counter=1;
+                     }
+                    if (driverAva==true) {
+                       busInfo<<"B"<<BID<<","<<line2<<","<<model<<","<<color<<","<<distanceTraveled<<","<<seats<<"\n";
+                       cout<<"\t\t\t[+] Successfully added bus information and assigned driver";
+                       assignedDriver=true;
+                       break;
+                        }
+                    }
+        driverId.close();
+        if (assignedDriver==false) {
+            busInfo<<"B"<<BID<<","<<"N/A"<<","<<model<<","<<color<<","<<distanceTraveled<<","<<seats<<"\n";
+            busInfo.close();
+            cout<<"\t\t\t[+] Successfully added bus information and could not assign driver";
+           }
+        BID=1;
+        ofstream clearRegister("temp.txt",ios::trunc);
+        clearRegister.close();
+        assignedDriver=false;
+    }
+};
