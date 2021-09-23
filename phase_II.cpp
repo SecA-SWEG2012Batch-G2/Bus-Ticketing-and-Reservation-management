@@ -1710,4 +1710,38 @@ void deleteBus() {
         cin>>id;
         delBus(id);
 }
-
+void rechargeBal() {
+    string id;
+    char amount[10];
+    int spaces[6]={12,30,10,13,5,12}, cou=0;
+    fstream information;
+    information.open("customer.txt", ios::in);
+    if (!information.is_open()) {
+        system("cls");
+        cout<<"       [-] Log file is not found";
+        system("pause");
+    }
+    cout<<setfill(' ');//FILL THE TABLES EMPTY SPACE WITH THE SPECIFIED CHARACTER
+    cout<<"\n\t__________________________________________________________________________________________\n";
+    cout<<"\t|"<<setw(12)<<"Customer ID |"<<setw(30)<<"Customer name     "<<setw(10)<<"| Age |"<<setw(13)<<" Balance |"<<setw(5)<<" Sex |"<<setw(12)<<" Traveling miles|\n";
+    char line[100];
+    fstream myFile;
+    myFile.open("customer.txt", ios::in);
+    while(information.getline(line, 100)) {
+        char *ptr = strtok(line,",");
+        while(ptr != NULL){
+            cout<<setw(spaces[cou])<<ptr;
+            ptr = strtok(NULL,",");
+            cou++;
+            }
+        cou=0;
+        cout<<endl;
+        }
+    cout<<"\n\t|________________________________________________________________________________________|";
+    information.close();
+    cout<<endl<<"\t enter the customer id of the customer you wish to recharge balance: ";
+    cin>>id;
+    cout<<endl<<"\t enter the new balance of the customer: ";
+    cin>>amount;
+    recharge(id,amount);
+}
