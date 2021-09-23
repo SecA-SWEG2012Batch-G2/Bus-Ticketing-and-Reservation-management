@@ -1299,6 +1299,43 @@ void editRoute(string id, char *ammount, int loc){
             ne<<line<<"\n";
         }
 }
+void setup(){//this is to create the log files if they are not present
+	fstream myFile;
+    bool empCh, custCh, busCh, routeCh, maintainCh, counterCh;
+    empCh = check("employee.txt");
+    custCh = check("customer.txt");
+    busCh = check("bus.txt");
+    routeCh= check("route.txt");
+    maintainCh = check("maintain.txt");
+    counterCh = check("counter.txt");
+    if(empCh==false){
+       myFile.open("employee.txt", ios::out);
+       myFile.close() ;
+    }
+    if(custCh==false){
+        myFile.open("customer.txt", ios::out);
+       myFile.close() ;
+    }
+    if(busCh==false){
+        myFile.open("bus.txt", ios::out);
+       myFile.close() ;
+    }
+    if(routeCh==false){
+        myFile.open("route.txt", ios::out);
+       myFile.close() ;
+    }
+    if(counterCh==false){
+        myFile.open("counter.txt", ios::out);
+       myFile.close() ;
+    }
+    if(maintainCh==false){
+        myFile.open("maintain.txt", ios::out);
+       myFile.close() ;
+    }
+}
+
+
+
 void editRoutePrompt(){//this function is called when u want to edit route
     string id;
     string loc;
