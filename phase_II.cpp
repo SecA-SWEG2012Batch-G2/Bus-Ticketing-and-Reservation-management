@@ -1433,3 +1433,33 @@ void adminMenu() {
         goto tryagain;
     }
 }
+void askPassword()
+{
+pass:
+    system("cls");
+    string password="1234";
+    int opt;
+    cout<<"\n\n\n\t\t\t\t"<<"Please enter password:"<<endl;
+    cout<<"\t\t\t\t"<<"password:  ";
+    cin>>password;
+    if (password=="1234") {
+        system("cls");
+        adminMenu();
+    }
+    else {
+        system("cls");
+        cout<<"\n\t\t\t\t"<<"Incorrect Password! please try again!\n"<<endl;
+        cout<<"\t\t\t\t"<<"press any number to try again and 0 to exit"<<endl;
+        cin>>opt;
+        if(opt==0)
+        {
+            exit;
+        }
+        else
+        {
+            goto pass;
+        }
+    }
+
+}
+
