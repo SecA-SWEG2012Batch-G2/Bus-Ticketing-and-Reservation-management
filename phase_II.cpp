@@ -1299,4 +1299,42 @@ void editRoute(string id, char *ammount, int loc){
             ne<<line<<"\n";
         }
 }
-
+void editRoutePrompt(){//this function is called when u want to edit route
+    string id;
+    string loc;
+    int loc1;
+    char amount[20];
+    cout<<"Enter the Id you want to edit";
+    cin>>id;
+    f:cout<<"Enter the attribute to edit(RID,BID,start,end,distance,price,passenger)";
+    cin>>loc;
+    if(loc=="RID"||loc=="rid"){
+        loc1=0;
+    }
+    else if(loc=="BID"||loc=="bid"){
+        loc1=1;
+    }
+    else if(loc=="START"||loc=="start"){
+        loc1=2;
+    }
+    else if(loc=="END"||loc=="end"){
+        loc1=3;
+    }
+    else if(loc=="DISTANCE"||loc=="distance"){
+        loc1=4;
+    }
+    else if(loc=="PRICE"||loc=="price"){
+        loc1=5;
+    }
+    else if(loc=="PASSENGER"||loc=="passenger"){
+        loc1=6;
+    }
+    else{
+        cout<<"[-] Please enter the correct choice";
+        goto f;
+    }
+    cout<<"Enter the updated value";
+    cin>>amount;
+    char *loca = &amount[0];
+    editRoute(id, loca, loc1);
+}
