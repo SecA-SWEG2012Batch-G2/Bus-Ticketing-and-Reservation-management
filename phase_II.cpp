@@ -676,3 +676,123 @@ void displayRoute()  //TAKE BUS STUCTURE ARRAY AND ITS SIZE AS PARAMETER
         system("pause");
     }
 }
+
+void displayCus()  //TAKE CUSTOMER STRUCTURE ARRAY AND ITS SIZE AS PARAMETER
+{
+        char line[200];
+    fstream information;
+    information.open("customer.txt", ios::in);
+    if (!information.is_open()) {
+        system("cls");
+        cout<<"       [-] Log file is not found";
+        system("pause");
+        goto empMenu;
+    }
+        char command;
+empMenu://SMALL MENU FOR DISPLAYING CUSTOMER INFORMATION
+    cout<<"\tHow would you like to display customer record"<<endl;
+    cout<<"       ________________________________________________________\n";
+    cout<<"       | 1. Display all customer record                        |\n";
+    cout<<"       | 2. Search using customer ID                           |\n";
+    cout<<"       | 3. exit                                               |\n";
+    cout<<"       |-------------------------------------------------------|\n";
+    cin>>command;//INPUT THE COMMAND FROM USER
+    int spaces[]={11,30,20,13,4,12,10,10,10,10,10}, cou=0;
+    if(command=='1'){
+       //TABLE THAT DISPLAY EVERY customer RECORD
+        char order;
+        cout<<"[+] do you want to display in ascending or descending order(a/d)?";
+a:
+        cin>>order;
+        if(order=='a'||order=='A'||order=='d'||order=='D')
+        {
+            if(order=='a'||order=='A')
+            {
+                cout<<setfill(' ');//FILL THE TABLES EMPTY SPACE WITH THE SPECIFIED CHARACTER
+                cout<<"\n\t__________________________________________________________________________________________\n";
+                cout<<"\t|"<<setw(12)<<"Customer ID |"<<setw(30)<<"Customer name     "<<setw(10)<<"| Age |"<<setw(13)<<" Balance |"<<setw(5)<<" Sex |"<<setw(12)<<" Traveling miles|\n";
+
+                char line[100];
+                fstream myFile;
+                myFile.open("customer.txt", ios::in);
+
+                while(information.getline(line, 100))
+                {
+                    char *ptr = strtok(line,",");
+                    while(ptr != NULL){
+                        cout<<setw(spaces[cou])<<ptr;
+                        ptr = strtok(NULL,",");
+                        cou++;
+                    }
+                    cou=0;
+                    cout<<endl;
+                }
+                cout<<"\n\t|________________________________________________________________________________________|";
+                system("pause");
+
+                }
+
+            else if( order=='d'|| order=='D'){
+                cout<<setfill(' ');//FILL THE TABLES EMPTY SPACE WITH THE SPECIFIED CHARACTER
+                cout<<"\n\t__________________________________________________________________________________________\n";
+                cout<<"\t|"<<setw(12)<<"Customer ID |"<<setw(30)<<"Customer name     "<<setw(10)<<"| Age |"<<setw(13)<<" Balance |"<<setw(5)<<" Sex |"<<setw(12)<<" Traveling miles|\n";
+                    std::string line;
+                    std::vector<std::string> v;
+                    std::ifstream file("customer.txt");
+                    while(getline(file, line)){
+                        v.push_back(line);
+                    }
+                    int cou=0;
+                    for(int i = v.size()-1; i>=0; i--){
+                        char line[v[i].length()+1];
+                        strcpy(line, v[i].c_str());
+                        char *ptr = strtok(line,",");
+                        while(ptr != NULL){
+                            cout<<setw(spaces[cou])<<ptr;
+                            ptr = strtok(NULL,",");
+                            cou++;
+                        }
+                        cou=0;
+                        cout<<endl;
+                    }
+                system("pause");
+                cout<<"\n\t|________________________________________________________________________________________|";
+                }
+            }
+        else
+        {
+              cout<<"[-]incorrect input please chose from ascending and descending(a/d)";
+              goto a;
+        }
+    }
+
+    else if(command=='2'){
+        string ser;
+        cout<<"[+] Enter the search term, it can be name,ID, age or any other attribute: ";
+        cin>>ser;
+        char line[100];
+        fstream myFile;
+        myFile.open("customer.txt", ios::in);
+        cout<<setfill(' ');
+         cout<<"\n\t__________________________________________________________________________________________\n";
+                cout<<"\t|"<<setw(12)<<"Customer ID |"<<setw(30)<<"Customer name     "<<setw(10)<<"| Age |"<<setw(13)<<" Balance |"<<setw(5)<<" Sex |"<<setw(12)<<" Traveling miles|\n";
+        while(information.getline(line, 100))
+        {
+            string hol= tostr(line);
+            if(hol.find(ser) != string::npos){
+
+                char *ptr = strtok(line,",");
+                while(ptr != NULL){
+                   cout<<setw(spaces[cou])<<ptr;
+                    ptr = strtok(NULL,",");
+                    cou++;
+                }
+                cou=0;
+                cout<<endl;
+            }
+
+        }
+        system("pause");
+    }
+
+}
