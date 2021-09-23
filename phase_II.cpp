@@ -311,3 +311,118 @@ struct Route{
         assignedBus=false;
    }
 };
+
+struct Booking {//TICKET BOOKING STRUCTURE
+    int TID=1;//TICKET ID
+    string BID;//BUS ID
+    string RID;//ROUTE ID
+    int seatNum=0;//seat number
+    string price;//PRICE OF TRAVEL
+    string CID;//CUSTOMER ID
+    string EID;//EMPLOYEE (TELLER) ID
+    string from, to,distance, name;
+    date depdate;//DATE OF DEPARTURE
+    void setBooking(string custId){
+        CID=custId;
+        string id, temp;
+        int spaces[]={20,5,23,13,10,12,10}, cou=0,counter=0,place=0;
+        fstream information;
+        information.open("route.txt", ios::in);
+        if (!information.is_open()) {
+            system("cls");
+            cout<<"       [-] Log file is not found";
+            system("pause");
+        }
+        ifstream setId("booking.txt",ios::app);
+        char pos,line[100],line2[100];
+        while(setId.getline(line,100)!= NULL) TID++;
+        setId.close();
+        cout<<setfill(' ');//FILL THE TABLES EMPTY SPACE WITH THE SPECIFIED CHARACTER
+        cout<<"\t|"<<setw(13)<<"Route ID |"<<setw(13)<<"Bus ID     |"<<setw(15)<<" Start |"<<setw(13)<<" End |"<<setw(5)<<" Distance |"<<setw(12)<<" Price|"<<setw(17)<<" Available Seats|\n";
+        fstream myFile;
+        myFile.open("route.txt", ios::in);
+
+        while(information.getline(line, 100))
+        {
+            char *ptr = strtok(line,",");
+            while(ptr != NULL){
+                cout<<setw(spaces[cou])<<ptr;
+                ptr = strtok(NULL,",");
+                cou++;
+            }
+            cou=0;
+            cout<<endl;
+        }
+        information.close();
+        cout<<endl<<"\t enter the route id to buy a ticket for that route: ";
+        cin>>id;
+        ifstream takedata("route.txt");
+        cou=0;
+        while(takedata.getline(line2, 100)) {
+                char *ptr1=strtok(line2,",");
+                temp=ptr1;
+                if (temp==id) break;
+                cou++;
+        }
+        while(takedata.getline(line2, 100)) {
+                if (counter==cou) {
+                char *ptr=strtok(line2,",");
+                while(ptr != NULL){
+                        cout<<ptr;
+                        if (place==0) RID=ptr;
+                        if (place==1) BID=ptr;
+                        if (place==2) EID=ptr;
+                        if (place==3) from=ptr;
+                        if (place==4) to=ptr;
+                        if (place==5) distance=ptr;
+                        if (place==6) price=ptr;
+                place++;
+                ptr=strtok(NULL,",");
+                }
+                counter++;
+        }
+        place=0;
+        cou=0;
+        counter=0;
+        ifstream custName("customer.txt");
+        while(custName.getline(line2, 100)) {
+                char *ptr1=strtok(line2,",");
+                temp=ptr1;
+                if (temp==custId) break;
+                cou++;
+        }
+        while(custName.getline(line2, 100)) {
+                if (counter==cou) {
+                char *ptr=strtok(line2,",");
+                while(ptr != NULL){
+                        if (place==1) name=ptr;
+                place++;
+                ptr=strtok(NULL,",");
+                }
+                counter++;
+        }
+        }
+        cout<<" \n\t________________________________________________________\n";
+        cout<<"\t|                     BUS TICKET                        |\n";
+        cout<<"\t|-------------------------------------------------------|\n";
+        cout<<"\t|"<<setw(14)<<"Ticket ID: T"<<setw(7)<<TID<<setw(36)<<" |\n";
+        cout<<"\t|"<<setw(9)<<"Bus ID:"<<setw(7)<<BID<<setw(17)<<"No of Seat:"<<seatNum<<setw(21)<<" |\n";
+        cout<<"\t|"<<setw(8)<<"name: "<<setw(17)<<name<<setw(32)<<"|\n";
+        cout<<"\t|"<<setw(14)<<"Customer ID:"<<setw(7)<<CID<<setw(36)<<" |\n";
+        cout<<"\t|"<<setw(9)<<"From:"<<setw(15)<<from<<"    To:"<<setw(15)<<to<<setw(11)<<" |\n";
+        cout<<"\t|"<<setw(11)<<"Route ID:"<<setw(7)<<RID<<setw(39)<<" |\n";
+        cout<<"\t|"<<setw(9)<<"Price: "<<setw(12)<<price<<setw(36)<<"|\n";
+
+
+cout<<"\t|"<<setw(8)<<"Date: "<<setw(8)<<depdate.dd<<"/"<<depdate.mm<<"/"<<depdate.yy<<setw(33)<<"|\n";
+        cout<<"\t|_______________________________________________________|\n";
+        ofstream binfo( "customer.txt", ios::app);
+        if(!binfo.is_open()) {
+            cout<<"[-] Unable to open log file.";
+        }
+        binfo<<"T"<<TID<<"\n";
+        binfo.close();
+        TID=1;
+    }
+    }
+};
