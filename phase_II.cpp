@@ -1576,4 +1576,44 @@ void insertRecordMenu() {
         goto tryagain;
     }
 }
-
+void displayRecord(){
+    char opt;
+    system("cls");
+    tryagain:
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"  ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose which record you would like to display: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Employee record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Bus information record\n"<<endl;
+    cout<<"\t\t\t\t"<<"4.Route information record\n"<<endl;
+    cout<<"\t\t\t\t"<<"5.Back to previous menu\n"<<endl;
+    cin>>opt;
+    switch(opt) {
+    case '1':
+        displayEmp();
+        displayRecord();
+        break;
+    case '2':
+        displayCus();
+        displayRecord();
+        break;
+    case '3':
+        displayBus();
+        displayRecord();
+        break;
+    case '4':
+        displayRoute();
+        displayRecord();
+        break;
+    case '5':
+        adminMenu();
+        break;
+    default:
+        cout<<"\tWrong key!/n";
+        system("pause");
+        system ("cls");
+        goto tryagain;
+    }
+}
