@@ -1678,4 +1678,36 @@ void deleteCus(){
     cin>>id;
     delCust(id);
 }
+void deleteBus() {
+    string id;
+    int spaces[6]={12,30,10,13,5,12}, cou=0;
+    fstream information;
+    information.open("bus.txt", ios::in);
+    if (!information.is_open()) {
+        system("cls");
+        cout<<"       [-] Log file is not found";
+        system("pause");
+    }
+    cout<<setfill(' ');//FILL THE TABLES EMPTY SPACE WITH THE SPECIFIED CHARACTER
+        cout<<"\t|"<<setw(12)<<"Employee ID |"<<setw(12)<<"Bus ID     |"<<setw(15)<<" Model |"<<setw(13)<<" Color |"<<setw(5)<<" Odometer |"<<setw(12)<<" Seats|\n";
+        char line[100];
+        fstream myFile;
+        myFile.open("bus.txt", ios::in);
+
+        while(information.getline(line, 100))
+        {
+            char *ptr = strtok(line,",");
+            while(ptr != NULL){
+                cout<<setw(spaces[cou])<<ptr;
+                ptr = strtok(NULL,",");
+                cou++;
+            }
+            cou=0;
+            cout<<endl;
+        }
+        information.close();
+        cout<<endl<<"\t enter the bus id of the bus you wish to delete: ";
+        cin>>id;
+        delBus(id);
+}
 
