@@ -1617,3 +1617,33 @@ void displayRecord(){
         goto tryagain;
     }
 }
+
+void deleteEmp () {
+        string id;
+        int spaces[6]={12,30,10,13,5,12}, cou=0;
+        cout<<setfill(' ');
+        ifstream information("employee.txt");
+        if (!information.is_open()) {
+            system("cls");
+            cout<<"       [-] Log file is not found";
+            system("pause");
+            }
+        cout<<setw(12)<<"Employee ID |"<<setw(30)<<"Employee name     "<<setw(10)<<"| Age |"<<setw(13)<<" Position |"<<setw(5)<<" Sex |"<<setw(12)<<" National ID|\n";
+        char line[100];
+        while(information.getline(line, 100))
+                {
+                    char *ptr = strtok(line,",");
+                    while(ptr != NULL){
+                        cout<<setw(spaces[cou])<<ptr;
+                        ptr = strtok(NULL,",");
+                        cou++;
+                    }
+                    cou=0;
+                    cout<<endl;
+                }
+        information.close();
+        cout<<endl<<"\t enter the employee id of the employee you wish to delete: ";
+        cin>>id;
+        delEmp(id);
+}
+
