@@ -188,3 +188,39 @@ struct bus{
         assignedDriver=false;
     }
 };
+
+struct customer{
+    int CID=1; //CUSTOMER ID
+    string name;// CUSTOMER NAME
+    int age; //AGE OF THE CUSTOMER
+    string identificationCard; //ID NUMBER OF THE CUSTOMER
+    int balance=0; //THE BALANCE OF THE CUSTOMER
+    char sex;//THE GENDER OF THE CUSTOintMER
+    int travelDistance; //THE DISTANCE THAT THE CUSTOMER COVERED BY THE COMPANY SERVICE
+    //FUNCTION TO INPUT AND RECORD EMPLOYEE INFORMATION
+    void inputCustomer(){
+        ifstream setId("customer.txt",ios::app);
+        char pos,line[100];
+        while(setId.getline(line,100)!= NULL) CID++;
+        setId.close();
+        system("cls");
+        cout<<"\n\t Enter the customer name: ";
+        cin.ignore();
+        getline(cin, name);//INPUT FULL NAME OF THE CUSTOMER
+        cout<<"\t Enter the customer age: ";
+        cin>>age;
+        balance=0;
+        cout<<"\t Enter the customer's sex: ";
+        cin>>sex;
+        cout<<"\t Enter the customer traveled Distance: ";
+        cin>>travelDistance;
+        ofstream cusinfo( "customer.txt", ios::app);
+        if(!cusinfo.is_open()) {
+            cout<<"[-] Unable to open log file.";
+        }
+        cusinfo<<"C"<<CID<<","<<name<<","<<age<<","<<balance<<","<<sex<<","<<travelDistance<<"\n";
+        cusinfo.close();
+        cout<<"\t\t\t[+] Successfully added customer\n";
+        CID=1;
+    }
+};
