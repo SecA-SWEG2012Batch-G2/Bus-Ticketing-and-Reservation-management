@@ -1462,4 +1462,33 @@ pass:
     }
 
 }
+void masterMenu()
+{
+    tryagain:
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"WELCOME TO BEST-BUS!"<<endl;
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t"<<"Please choose your clearance level:\n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Administrator\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer"<<endl;
+    char option;
+    cin>>option;
+    switch(option)
+      {
+    case '1':
+        askPassword();
+        system("pause");
+        system ("cls");
+        goto tryagain;
+        break;
+    case '2':
+        book();
+        goto tryagain;
+        break;
+    default:
+        system("cls");
+        cout<<"\n\t\t\t\t  !Wrong key! \n\n";
+        goto tryagain;
 
+    }
+}
