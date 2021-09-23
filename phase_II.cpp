@@ -1338,6 +1338,49 @@ void editRoutePrompt(){//this function is called when u want to edit route
     char *loca = &amount[0];
     editRoute(id, loca, loc1);
 }
+void editRecordMenu(){
+
+int opt;
+    gy:
+    system("cls");
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"  ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose which record you would like to edit/modify: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Employee record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Bus information record\n"<<endl;
+    cout<<"\t\t\t\t"<<"4.Route information record\n"<<endl;
+    cin>>opt;
+    switch(opt)
+    {
+    case 1:
+        editEmpPrompt();
+        goto gy;
+        break;
+    case 2:
+        editCustPrompt();
+        goto gy;
+        break;
+    case 3:
+        editBusPrompt();
+        goto gy;
+        break;
+    case 4:
+
+        editRoutePrompt();
+        goto gy;
+        break;
+    case 5:
+        adminMenu();
+        break;
+    default:
+        cout<<"[-] Wrong input";
+        goto gy;
+    }
+}
+
+
 void adminMenu() {
     system("cls");
     tryagain:
