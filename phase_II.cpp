@@ -1215,3 +1215,38 @@ void editCust(string id, char *ammount, int loc){
             ne<<line<<"\n";
         }
 }
+
+void editCustPrompt(){//this function is called when u want to edit customer
+    string id;
+    string loc;
+    int loc1;
+    char amount[20];
+    cout<<"Enter the Id you want to edit";
+    cin>>id;
+    f:cout<<"Enter the attribute to edit(CID,name,balance,sex,distance)";
+    cin>>loc;
+    if(loc=="CID"||loc=="cid"){
+        loc1=0;
+    }
+    else if(loc=="NAME"||loc=="name"){
+        loc1=1;
+    }
+    else if(loc=="BALANCE"||loc=="balance"){
+        loc1=2;
+    }
+    else if(loc=="SEX"||loc=="sex"){
+        loc1=3;
+    }
+    else if(loc=="DISTANCE"||loc=="distance"){
+        loc1=4;
+    }
+    else{
+        cout<<"[-] Please enter the correct choice";
+        goto f;
+    }
+    cout<<"Enter the updated value";
+    cin>>amount;
+    char *loca = &amount[0];
+    editCust(id, loca, loc1);
+}
+
