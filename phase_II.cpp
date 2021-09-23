@@ -1524,3 +1524,56 @@ int main(){
     masterMenu();
 
 }
+void insertRecordMenu() {
+    char insertRec;
+    employeeInfo empRec;
+    customer cusRec;
+    bus busRec;
+    tryagain:
+    system("cls");
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"   ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose which record you would like to insert: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Employee record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Customer record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Bus information record\n"<<endl;
+    cout<<"\t\t\t\t"<<"4.Back to previous menu\n"<<endl;
+    cin>>insertRec;
+    switch(insertRec)
+    {
+    case '1':
+        system("cls");
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        cout<<"\t\t\t\t"<<"Employee Record Input Portal"<<endl;
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        empRec.Record_Emp_Info();
+        break;
+    case '2':
+        system("cls");
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        cout<<"\t\t\t\t"<<"Customer Information Record Portal"<<endl;
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        cusRec.inputCustomer();
+        system("pause");
+        system ("cls");
+        goto tryagain;
+        break;
+    case '3':
+        system("cls");
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        cout<<"\t\t\t\t"<<" Bus Information Record Portal"<<endl;
+        cout<<"\t\t\t"<<"***********************************************"<<endl;
+        busRec.inputBus();
+        break;
+    case '4':
+        adminMenu();
+        break;
+    default:
+        cout<<"\tWrong key!/n";
+        system("pause");
+        system ("cls");
+        goto tryagain;
+    }
+}
+
