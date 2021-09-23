@@ -1338,3 +1338,55 @@ void editRoutePrompt(){//this function is called when u want to edit route
     char *loca = &amount[0];
     editRoute(id, loca, loc1);
 }
+void adminMenu() {
+    system("cls");
+    tryagain:
+    char adminOpt;
+    cout<<"\t\t\t"<<"***********************************"<<endl;
+    cout<<"\t\t\t\t"<<"  ADMIN PORTAL"<<endl;
+    cout<<"\t\t\t"<<"***********************************\n"<<endl;
+    cout<<"\t\t\t"<<"Choose the task you would like to do: \n"<<endl;
+    cout<<"\t\t\t\t"<<"1.Insert a new record\n"<<endl;
+    cout<<"\t\t\t\t"<<"2.Edit a record\n"<<endl;
+    cout<<"\t\t\t\t"<<"3.Display entries\n"<<endl;
+    cout<<"\t\t\t\t"<<"4.Delete entries\n"<<endl;
+    cout<<"\t\t\t\t"<<"5.Recharge Customer's Balance\n"<<endl;
+    cin>>adminOpt;
+    switch(adminOpt)
+    {
+    case '1':
+        insertRecordMenu();
+        system("pause");
+        system ("cls");
+        goto tryagain;
+        break;
+    case '2':
+        editRecordMenu();
+        system("pause");
+        system ("cls");
+        goto tryagain;
+        break;
+    case '3':
+        displayRecord();
+        system("pause");
+        system ("cls");
+        goto tryagain;
+        break;
+    case '4':
+        deleteRecordMenu();
+        system("pause");
+        system ("cls");
+        goto tryagain;
+        break;
+    case '5':
+        rechargeBal();
+        system("pause");
+        system ("cls");
+        goto tryagain;
+        break;
+    default:
+        system("cls");
+        cout<<"\n\t\t\t\t  !Wrong key! \n\n";
+        goto tryagain;
+    }
+}
