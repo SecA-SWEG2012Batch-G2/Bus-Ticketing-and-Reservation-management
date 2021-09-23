@@ -426,3 +426,34 @@ cout<<"\t|"<<setw(8)<<"Date: "<<setw(8)<<depdate.dd<<"/"<<depdate.mm<<"/"<<depda
     }
     }
 };
+
+void customerVerify () {
+    Booking book;
+    char line[100];
+    string id, temp;
+    bool custId=false;
+    ifstream cusId("customer.txt",ios::app);
+        while(cusId.getline(line, 100)) {
+                char *ptr=strtok(line,",");
+            ofstream registr("temp.txt",ios::app);
+            registr<<ptr<<"\n";
+        ptr = strtok(NULL,",");
+        }
+        cusId.close();
+        cout<<endl<<"\t enter your customer id to book a ticket: ";
+        cin>>id;
+        ifstream registr("temp.txt");
+        while (registr.getline(line,100)) {
+            temp=line;
+            if(id==temp) custId=true;
+        }
+        registr.close();
+        if (custId==true) {
+            book.setBooking(id);
+        }
+        else {
+            cout<<"\t\t\n[!] your id is not registered, please register at our office [!]";
+        }
+        ofstream clrregistr("temp.txt",ios::trunc);
+        clrregistr.close();
+}
