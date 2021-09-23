@@ -1032,3 +1032,40 @@ void editBus(string id, char *ammount, int loc){
             ne<<line<<"\n";
         }
 }
+
+void editBusPrompt(){//this function is called when u want to edit bus
+    string id;
+    string loc;
+    int loc1;
+    char amount[20];
+    cout<<"Enter the Id you want to edit";
+    cin>>id;
+    f:cout<<"Enter the attribute to edit(EID,BID,model,color,odometer,seat)";
+    cin>>loc;
+    if(loc=="EID"||loc=="eid"){
+        loc1=0;
+    }
+    else if(loc=="BID"||loc=="bid"){
+        loc1=1;
+    }
+    else if(loc=="MODEL"||loc=="model"){
+        loc1=2;
+    }
+    else if(loc=="COLOR"||loc=="color"){
+        loc1=3;
+    }
+    else if(loc=="ODOMETER"||loc=="odometer"){
+        loc1=4;
+    }
+    else if(loc=="SEAT"||loc=="seat"){
+        loc1=5;
+    }
+    else{
+        cout<<"[-] Please enter the correct choice";
+        goto f;
+    }
+    cout<<"Enter the updated value";
+    cin>>amount;
+    char *loca = &amount[0];
+    editBus(id, loca, loc1);
+}
