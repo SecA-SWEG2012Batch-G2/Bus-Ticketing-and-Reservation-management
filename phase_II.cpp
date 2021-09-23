@@ -604,3 +604,75 @@ empMenu://SMALL MENU FOR DISPLAYING BUS INFORMATION
     }
 }
 
+void displayRoute()  //TAKE BUS STUCTURE ARRAY AND ITS SIZE AS PARAMETER
+{
+    char line[200];
+    fstream information;
+    information.open("route.txt", ios::in);
+    if (!information.is_open()) {
+        system("cls");
+        cout<<"       [-] Log file is not found";
+        system("pause");
+        goto empMenu;
+    }
+
+    char command;
+      empMenu://SMALL MENU FOR DISPLAYING ROUTES INFORMATION
+      cout<<"\tHow would you like to display route record"<<endl;
+      cout<<"       ________________________________________________________\n";
+      cout<<"       | 1. Display all routes record                          |\n";
+      cout<<"       | 2. Search using routes ID                             |\n";
+      cout<<"       | 3. exit                                               |\n";
+      cout<<"       |-------------------------------------------------------|\n";
+      cin>>command;//INPUT THE COMMAND FROM USER
+    int spaces[]={20,5,23,13,10,12,10}, cou=0;
+   if(command=='1'){
+        //TABLE THAT DISPLAY EVERY BUS RECORD
+        cout<<setfill(' ');//FILL THE TABLES EMPTY SPACE WITH THE SPECIFIED CHARACTER
+        cout<<"\t|"<<setw(13)<<"Route ID |"<<setw(13)<<"Bus ID     |"<<setw(15)<<" Start |"<<setw(13)<<" End |"<<setw(5)<<" Distance |"<<setw(12)<<" Price|"<<setw(17)<<" Available Seats|\n";
+        char line[100];
+        fstream myFile;
+        myFile.open("route.txt", ios::in);
+
+        while(information.getline(line, 100))
+        {
+            char *ptr = strtok(line,",");
+            while(ptr != NULL){
+                cout<<setw(spaces[cou])<<ptr;
+                ptr = strtok(NULL,",");
+                cou++;
+            }
+            cou=0;
+            cout<<endl;
+        }
+        system("pause");
+   }
+    else if(command=='2'){
+        string ser;
+        cout<<"[+] Enter the search term, it can be start ,ID, destination or any other attribute: ";
+        cin>>ser;
+        char line[100];
+        fstream myFile;
+        myFile.open("route.txt", ios::in);
+        cout<<setfill(' ');
+
+        cout<<"\t|"<<setw(13)<<"Route ID |"<<setw(13)<<"Bus ID     |"<<setw(15)<<" Start |"<<setw(13)<<" End |"<<setw(5)<<" Distance |"<<setw(12)<<" Price|"<<setw(17)<<" Available Seats|\n";
+        while(information.getline(line, 100))
+        {
+            string hol= tostr(line);
+            if(hol.find(ser) != string::npos){
+
+                char *ptr = strtok(line,",");
+                while(ptr != NULL){
+                   cout<<setw(spaces[cou])<<ptr;
+                    ptr = strtok(NULL,",");
+                    cou++;
+                }
+                cou=0;
+                cout<<endl;
+            }
+
+        }
+        system("pause");
+    }
+}
